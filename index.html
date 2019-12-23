@@ -87,15 +87,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-Git基础"><a href="#1-Git基础" class="headerlink" title="1. Git基础"></a>1. Git基础</h2><h3 id="1-1-版本管理"><a href="#1-1-版本管理" class="headerlink" title="1.1 版本管理"></a>1.1 版本管理</h3><h4 id="1-1-1-什么是版本管理"><a href="#1-1-1-什么是版本管理" class="headerlink" title="1.1.1 什么是版本管理"></a>1.1.1 什么是版本管理</h4><p>版本管理是一种记录文件变化的方式，以便将来查阅特定版本的文件内容。</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\01.png?lastModify=1577090396)</p>
 <h4 id="1-1-2-人为维护文档版本的问题"><a href="#1-1-2-人为维护文档版本的问题" class="headerlink" title="1.1.2 人为维护文档版本的问题"></a>1.1.2 人为维护文档版本的问题</h4><ol>
 <li>文档数量多且命名不清晰导致文档版本混乱</li>
 <li>每次编辑文档需要复制，不方便</li>
 <li>多人同时编辑同一个文档，容易产生覆盖</li>
 </ol>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\04.png?lastModify=1577090396)</p>
 <h3 id="1-2-Git-是什么"><a href="#1-2-Git-是什么" class="headerlink" title="1.2 Git 是什么"></a>1.2 Git 是什么</h3><p>Git是一个版本管理控制系统（缩写VCS），它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\19.png?lastModify=1577090396)</p>
 <h3 id="1-3-Git-安装"><a href="#1-3-Git-安装" class="headerlink" title="1.3 Git 安装"></a>1.3 Git 安装</h3><p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载地址</a> </p>
 <p>在安装的过程中，所有选项使用默认值即可。</p>
 <h3 id="1-4-Git-基本工作流程"><a href="#1-4-Git-基本工作流程" class="headerlink" title="1.4 Git 基本工作流程"></a>1.4 Git 基本工作流程</h3><table>
@@ -112,7 +109,6 @@
 <td>被Git管理的项目目录</td>
 </tr>
 </tbody></table>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\05.png?lastModify=1577090396)</p>
 <h3 id="1-5-Git-的使用"><a href="#1-5-Git-的使用" class="headerlink" title="1.5 Git 的使用"></a>1.5 Git 的使用</h3><h4 id="1-5-1-Git-使用前配置"><a href="#1-5-1-Git-使用前配置" class="headerlink" title="1.5.1 Git 使用前配置"></a>1.5.1 Git 使用前配置</h4><p>在使用 git 前，需要告诉 git 你是谁，在向 git 仓库中提交时需要用到。</p>
 <ol>
 <li>配置提交人姓名：<code>git config --global user.name 提交人姓名</code></li>
@@ -136,21 +132,19 @@
 <li>将文件从暂存区中删除： <code>git rm --cached 文件</code></li>
 <li>将 git 仓库中指定的更新记录恢复出来，并且覆盖暂存区和工作目录：<code>git rest --hard commitID</code> </li>
 </ul>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\07.png?lastModify=1577090396)</p>
 <h2 id="2-Git进阶"><a href="#2-Git进阶" class="headerlink" title="2. Git进阶"></a>2. Git进阶</h2><h3 id="2-1-分支"><a href="#2-1-分支" class="headerlink" title="2.1 分支"></a>2.1 分支</h3><p>为了便于理解，大家暂时可以认为分支就是当前工作目录中代码的一份副本。</p>
 <p>使用分支，可以让我们从开发主线上分离出来，以免影响开发主线。</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\08.png?lastModify=1577090396)</p>
 <h4 id="2-1-1-分支细分"><a href="#2-1-1-分支细分" class="headerlink" title="2.1.1 分支细分"></a>2.1.1 分支细分</h4><ol>
 <li><p>主分支（master）：第一次向 git 仓库中提交更新记录时自动产生的一个分支。</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\06.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 </ol>
 <ol>
 <li><p>、开发分支（develop）：作为开发的分支，基于 master 分支创建。</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\09.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>功能分支（feature）：作为开发具体功能的分支，基于开发分支创建</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\10.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 </ol>
 <p><strong>功能分支 -&gt; 开发分支 -&gt; 主分支</strong></p>
@@ -171,22 +165,22 @@
 <p>只有当你需要和你的开发团队共享数据时，设置一个远程仓库才有意义。你可以把它想象成一个 “文件管理服务器”，利用这个服务器可以与开发团队的其他成员进行数据交换。</p>
 <h3 id="3-1-注册"><a href="#3-1-注册" class="headerlink" title="3.1 注册"></a>3.1 注册</h3><ol>
 <li><p>访问<a href="https://github.com/" target="_blank" rel="noopener">github</a>首页，点击 Sign up 连接。（注册）</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\11.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>填写用户名、邮箱地址、GitHub登陆密码</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\12.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>选择计划</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\13.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>填写 GitHub 问题</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\14.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>验证邮箱</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\15.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>GitHub 个人中心</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\16.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 </ol>
 <h3 id="3-2-多人协作开发流程"><a href="#3-2-多人协作开发流程" class="headerlink" title="3.2 多人协作开发流程"></a>3.2 多人协作开发流程</h3><ul>
@@ -197,14 +191,12 @@
 <li>B将本地仓库中开发的内容推送到远程仓库</li>
 <li>A将远程仓库中的最新内容拉去到本地</li>
 </ul>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\20.png?lastModify=1577090396)</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\21.png?lastModify=1577090396)</p>
 <h3 id="3-3-创建仓库"><a href="#3-3-创建仓库" class="headerlink" title="3.3 创建仓库"></a>3.3 创建仓库</h3><ol>
 <li><p>填写仓库基本信息</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\17.png?lastModify=1577090396)</p>
+<p>​</p>
 </li>
 <li><p>将本地仓库推送到远程仓库</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\18.png?lastModify=1577090396)</p>
+<p>​</p>
 <ol>
 <li><p>git push 远程仓库地址 分支名称</p>
 </li>
@@ -230,13 +222,10 @@
 <li>原仓库作者合并代码</li>
 </ol>
 <h3 id="3-7-ssh免登陆"><a href="#3-7-ssh免登陆" class="headerlink" title="3.7 ssh免登陆"></a>3.7 ssh免登陆</h3><p>https协议仓库地址：<a href="https://github.com/itcast-frontEnd/git-demo.git" target="_blank" rel="noopener">https://github.com/itcast-frontEnd/git-demo.git</a></p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\22.png?lastModify=1577090396)</p>
 <p>生成秘钥：<code>ssh-keygen</code></p>
 <p>秘钥存储目录：C:\Users\用户.ssh</p>
 <p>公钥名称：id_rsa.pub</p>
 <p>私钥名称：id_rsa</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\23.png?lastModify=1577090396)</p>
-<p>![img](file://D:\BaiduNetdiskDownload\前端00\就业班\12-18 前后端交互\阿里百秀\阿里百秀\day01\讲义\Git\assets\24.png?lastModify=1577090396)</p>
 <h3 id="3-8-GIT忽略清单"><a href="#3-8-GIT忽略清单" class="headerlink" title="3.8 GIT忽略清单"></a>3.8 GIT忽略清单</h3><p>将不需要被git管理的文件名字添加到此文件中，在执行git命令的时候，git就会忽略这些文件。</p>
 <p>git忽略清单文件名称：<strong>.gitignore</strong></p>
 <p>将工作目录中的文件全部添加到暂存区：<code>git add .</code></p>

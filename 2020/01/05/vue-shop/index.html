@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.1.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon(1).ico">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -21,7 +19,7 @@
   var CONFIG = {
     hostname: new URL('http://yoursite.com').hostname,
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.7.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
@@ -55,8 +53,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/01/05/vue-shop/buju.png">
 <meta property="article:published_time" content="2020-01-05T11:53:54.000Z">
-<meta property="article:modified_time" content="2020-01-05T11:56:36.384Z">
+<meta property="article:modified_time" content="2020-01-11T19:42:45.207Z">
 <meta property="article:author" content="meixiang">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="实战">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/01/05/vue-shop/buju.png">
 
@@ -140,6 +141,16 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
@@ -174,7 +185,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/vue-shop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://himg.bdimg.com/sys/portrait/item/pp.1.d830037.1rA_ig6n73rdXpYz8Tv-ug?_t=1578768982138">
       <meta itemprop="name" content="meixiang">
       <meta itemprop="description" content="">
     </span>
@@ -193,9 +204,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-01-05 19:53:54 / Modified: 19:56:36" itemprop="dateCreated datePublished" datetime="2020-01-05T19:53:54+08:00">2020-01-05</time>
+              <time title="Created: 2020-01-05 19:53:54" itemprop="dateCreated datePublished" datetime="2020-01-05T19:53:54+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-12 03:42:45" itemprop="dateModified" datetime="2020-01-12T03:42:45+08:00">2020-01-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">实战项目</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -278,6 +306,11 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
 
         
 
@@ -354,6 +387,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="meixiang"
+      src="https://himg.bdimg.com/sys/portrait/item/pp.1.d830037.1rA_ig6n73rdXpYz8Tv-ug?_t=1578768982138">
   <p class="site-author-name" itemprop="name">meixiang</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -362,9 +397,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -387,7 +434,7 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2019 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
@@ -397,7 +444,7 @@
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.1.1
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
   </div>
 
         
@@ -423,12 +470,14 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
 
 
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
 
 
   

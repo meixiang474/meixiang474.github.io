@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="js基础," />
 
 
 
@@ -94,12 +94,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="meixiang">
-<meta property="og:url" content="http://yoursite.com/archives/2019/05/index.html">
+<meta name="description" content="从输入url到渲染出页面的整个过程 加载资源 渲染页面  window.onload和DOMContentLoaded的区别 前者资源全部加载完才执行, 包括图片 后者是在dom渲染完成就执行, 图片可能尚未下载  知识点 加载资源的形式 html代码 媒体文件 js css   加载资源的过程 DNS解析: 域名 —&gt; IP地址 浏览器根据IP地址向服务器发起http请求 服务器处理请求,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js基础-渲染机制">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/paint/index.html">
 <meta property="og:site_name" content="meixiang">
+<meta property="og:description" content="从输入url到渲染出页面的整个过程 加载资源 渲染页面  window.onload和DOMContentLoaded的区别 前者资源全部加载完才执行, 包括图片 后者是在dom渲染完成就执行, 图片可能尚未下载  知识点 加载资源的形式 html代码 媒体文件 js css   加载资源的过程 DNS解析: 域名 —&gt; IP地址 浏览器根据IP地址向服务器发起http请求 服务器处理请求,">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-25T12:33:12.000Z">
+<meta property="article:modified_time" content="2020-02-25T13:04:36.089Z">
 <meta property="article:author" content="meixiang">
+<meta property="article:tag" content="js基础">
 <meta name="twitter:card" content="summary">
 
 
@@ -129,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/05/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/02/25/paint/"/>
 
 
 
 
 
-  <title>Archive | meixiang</title>
+  <title>js基础-渲染机制 | meixiang</title>
   
 
 
@@ -160,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -254,74 +259,181 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 16 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/paint/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/05/07/mpvue/" itemprop="url">
-              
-                <span itemprop="name">mpvue项目搭建</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">js基础-渲染机制</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-07T22:33:45+08:00"
-              content="2019-05-07" >
-          05-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-25T20:33:12+08:00">
+                2020-02-25
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h4 id="从输入url到渲染出页面的整个过程"><a href="#从输入url到渲染出页面的整个过程" class="headerlink" title="从输入url到渲染出页面的整个过程"></a>从输入url到渲染出页面的整个过程</h4><ul>
+<li>加载资源</li>
+<li>渲染页面</li>
+</ul>
+<h4 id="window-onload和DOMContentLoaded的区别"><a href="#window-onload和DOMContentLoaded的区别" class="headerlink" title="window.onload和DOMContentLoaded的区别"></a>window.onload和DOMContentLoaded的区别</h4><ul>
+<li>前者资源全部加载完才执行, 包括图片</li>
+<li>后者是在dom渲染完成就执行, 图片可能尚未下载</li>
+</ul>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>加载资源的形式<ul>
+<li>html代码</li>
+<li>媒体文件</li>
+<li>js css</li>
+</ul>
+</li>
+<li>加载资源的过程<ul>
+<li>DNS解析: 域名 —&gt; IP地址</li>
+<li>浏览器根据IP地址向服务器发起http请求</li>
+<li>服务器处理请求, 并返回给浏览器</li>
+</ul>
+</li>
+<li>渲染页面的过程<ul>
+<li>根据HTML代码生成DOM树</li>
+<li>根据CSS代码生成CSSOM</li>
+<li>将DOM树和CSSOM整合成Render Tree</li>
+<li>根据Render Tree渲染页面</li>
+<li>遇到script则暂停渲染, 优先加载并执行JS代码, 完成再继续</li>
+<li>直至把Render Tree渲染完成</li>
+</ul>
+</li>
+</ul>
+<h4 id="为何把css放在head中"><a href="#为何把css放在head中" class="headerlink" title="为何把css放在head中"></a>为何把css放在head中</h4><h4 id><a href="#" class="headerlink" title></a></h4>
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js%E5%9F%BA%E7%A1%80/" rel="tag"># js基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/20/js-bom/" rel="next" title="js基础-BOM">
+                <i class="fa fa-chevron-left"></i> js基础-BOM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/25/epub/" rel="prev" title="epubjs相关api">
+                epubjs相关api <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -329,6 +441,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -349,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -412,6 +537,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#从输入url到渲染出页面的整个过程"><span class="nav-number">1.</span> <span class="nav-text">从输入url到渲染出页面的整个过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#window-onload和DOMContentLoaded的区别"><span class="nav-number">2.</span> <span class="nav-text">window.onload和DOMContentLoaded的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点"><span class="nav-number">3.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何把css放在head中"><span class="nav-number">4.</span> <span class="nav-text">为何把css放在head中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -537,11 +678,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   

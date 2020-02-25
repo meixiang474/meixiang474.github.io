@@ -102,7 +102,7 @@
 <meta property="og:description" content="安装vant1npm i vant -S  安装babel-plugin-import1npm i babel-plugin-import -D  在 babel.config.js文件里 123456789101112131415module.exports &#x3D; &amp;#123;    presets: [        &#39;@vue&#x2F;app&#39;    ],    p">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-18T18:03:52.000Z">
-<meta property="article:modified_time" content="2020-02-18T18:19:22.357Z">
+<meta property="article:modified_time" content="2020-02-21T08:09:19.049Z">
 <meta property="article:author" content="meixiang">
 <meta property="article:tag" content="vant-ui">
 <meta name="twitter:card" content="summary">
@@ -356,7 +356,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#39;amfe-flexible&#x2F;index.js&#39;</span><br></pre></td></tr></table></figure>
 
 <p>在postcss.config.js文件内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">        &#39;autoprefixer&#39;: &#123;</span><br><span class="line">            browsers: [&#39;Android&gt;&#x3D;4.0&#39;, &#39;iOS&gt;&#x3D;7&#39;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#39;postcss-pxtorem&#39;: &#123;</span><br><span class="line">            rootValue: 37.5,</span><br><span class="line">            propList: [&#39;*&#39;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">        &#39;autoprefixer&#39;: &#123;</span><br><span class="line">            overrideBrowserslist: [&#39;Android&gt;&#x3D;4.0&#39;, &#39;iOS&gt;&#x3D;7&#39;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#39;postcss-pxtorem&#39;: &#123;</span><br><span class="line">            rootValue: 37.5,</span><br><span class="line">            propList: [&#39;*&#39;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决移动端点击延迟300ms问题"><a href="#解决移动端点击延迟300ms问题" class="headerlink" title="解决移动端点击延迟300ms问题"></a>解决移动端点击延迟300ms问题</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html&#123;</span><br><span class="line">	touch-action: manipulation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -477,7 +479,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -499,7 +501,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -534,7 +536,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装vant"><span class="nav-number">1.</span> <span class="nav-text">安装vant</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装babel-plugin-import"><span class="nav-number">2.</span> <span class="nav-text">安装babel-plugin-import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vant的rem适配"><span class="nav-number">3.</span> <span class="nav-text">vant的rem适配</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装vant"><span class="nav-number">1.</span> <span class="nav-text">安装vant</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装babel-plugin-import"><span class="nav-number">2.</span> <span class="nav-text">安装babel-plugin-import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vant的rem适配"><span class="nav-number">3.</span> <span class="nav-text">vant的rem适配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决移动端点击延迟300ms问题"><span class="nav-number">4.</span> <span class="nav-text">解决移动端点击延迟300ms问题</span></a></li></ol></div>
             
 
           </div>

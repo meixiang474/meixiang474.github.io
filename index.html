@@ -270,6 +270,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/epub/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/25/epub/" itemprop="url">epubjs相关api</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-25T10:59:51+08:00">
+                2020-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="阅读器的解析和渲染"><a href="#阅读器的解析和渲染" class="headerlink" title="阅读器的解析和渲染"></a>阅读器的解析和渲染</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Epub <span class="keyword">from</span> <span class="string">'epubjs'</span></span><br><span class="line">global.epub = Epub</span><br><span class="line">methods: &#123;</span><br><span class="line">    initEpub()&#123;</span><br><span class="line">        <span class="comment">// 获取book对象</span></span><br><span class="line">        <span class="keyword">this</span>.book = <span class="keyword">new</span> Epub(url)</span><br><span class="line">        <span class="comment">// 渲染电子书</span></span><br><span class="line">       <span class="keyword">this</span>.rendition =  <span class="keyword">this</span>.book.renderTo(<span class="string">'read'</span>,&#123;</span><br><span class="line">            width: innerWidth,</span><br><span class="line">            height: innerHeight,</span><br><span class="line">            method: <span class="string">'default'</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">this</span>.rendition.display()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="阅读器翻页功能"><a href="#阅读器翻页功能" class="headerlink" title="阅读器翻页功能"></a>阅读器翻页功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给阅读器绑定方法</span></span><br><span class="line"><span class="keyword">this</span>.rendition.on(<span class="string">'touchstart'</span>, event =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">this</span>.rendition.on(<span class="string">'touchend'</span>, event =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 阅读器左翻页</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.rendition)&#123;</span><br><span class="line">    <span class="keyword">this</span>.rendition.prev()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 右翻页</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.rendition)&#123;</span><br><span class="line">    <span class="keyword">this</span>.rendition.next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字号设置功能"><a href="#字号设置功能" class="headerlink" title="字号设置功能"></a>字号设置功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.book.rendition.themes.fontSize(fontSize)</span><br></pre></td></tr></table></figure>
+
+<h4 id="字体设置功能"><a href="#字体设置功能" class="headerlink" title="字体设置功能"></a>字体设置功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给阅读器引入字体的css文件</span></span><br><span class="line"><span class="keyword">this</span>.rendition.hooks.content.register(<span class="function"><span class="params">contents</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 必须是url不能是路径</span></span><br><span class="line">    <span class="built_in">Promise</span>.all([</span><br><span class="line">        contents.addStylesheet(url)</span><br><span class="line">    ]).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">this</span>.book.rendition.themes.font(font)</span><br></pre></td></tr></table></figure>
+
+<h4 id="阅读器主题切换"><a href="#阅读器主题切换" class="headerlink" title="阅读器主题切换"></a>阅读器主题切换</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先定义一个主题数组, 数组中是各个主题对象, 对象中要包含主题名称和主题样式</span></span><br><span class="line"><span class="keyword">this</span>.themeList.forEach(<span class="function"><span class="params">theme</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.rendition.themes.register(theme.name, theme.style)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 选择主题</span></span><br><span class="line"><span class="keyword">this</span>.book.rendition.themes.select(theme.name)</span><br></pre></td></tr></table></figure>
+
+<h4 id="动态切换全局样式"><a href="#动态切换全局样式" class="headerlink" title="动态切换全局样式"></a>动态切换全局样式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addCss</span>(<span class="params">href</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">let</span> link = <span class="built_in">document</span>.getElementById(<span class="string">'link'</span>)</span><br><span class="line">   <span class="keyword">if</span>(!link)&#123;</span><br><span class="line">       link = <span class="built_in">document</span>.createElement(<span class="string">'link'</span>)</span><br><span class="line">        link.setAttribute(<span class="string">'id'</span>, <span class="string">'link'</span>)</span><br><span class="line">       link.setAttribute(<span class="string">'rel'</span>, <span class="string">'stylesheet'</span>)</span><br><span class="line">       link.setAttribute(<span class="string">'type'</span>, <span class="string">'text/css'</span>)</span><br><span class="line">       link.setAttribute(<span class="string">'href'</span> href)</span><br><span class="line">       <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(link)</span><br><span class="line">   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		link.setAttribute(<span class="string">'href'</span> href)</span><br><span class="line">   		</span><br><span class="line">   	&#125;</span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="阅读器进度相关api"><a href="#阅读器进度相关api" class="headerlink" title="阅读器进度相关api"></a>阅读器进度相关api</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先实现分页</span></span><br><span class="line"><span class="keyword">this</span>.book.ready.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.book.locations.generate(<span class="number">750</span>*<span class="function">(<span class="params"><span class="built_in">window</span>.innerWidth<span class="regexp">/375)*(16/</span>fontSize</span>)).<span class="params">then</span>(<span class="params">(</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 设置可以拖动进度条</span></span><br><span class="line">        <span class="keyword">this</span>.bookAvailable = <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 该函数实现根据拖动条的百分比跳转电子书</span></span><br><span class="line">displayProgress()&#123;</span><br><span class="line">    <span class="keyword">const</span> cfi = <span class="keyword">this</span>.book.locations.cfiFromPercentage(<span class="keyword">this</span>.progress/<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">this</span>.book.rendition.display(cfi)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 上一章下一章进行跳转</span></span><br><span class="line">prevSection()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.section&gt;<span class="number">0</span>&amp;&amp;<span class="keyword">this</span>.bookAvailable)&#123;</span><br><span class="line">        <span class="keyword">this</span>.section--</span><br><span class="line">        <span class="keyword">const</span> sectionInfo = <span class="keyword">this</span>.book.section(<span class="keyword">this</span>.section)</span><br><span class="line">        <span class="keyword">if</span>(sectionInfo&amp;&amp;sectionInfo.href)&#123;</span><br><span class="line">            <span class="keyword">this</span>.book.rendition.display(sectionInfo.href).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// 刷新进度条</span></span><br><span class="line">                <span class="keyword">this</span>.refreshLocation()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">nextSection()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.section&lt;<span class="keyword">this</span>.book.spine.length<span class="number">-1</span>&amp;&amp;<span class="keyword">this</span>.bookAvailable)&#123;</span><br><span class="line">        <span class="keyword">this</span>.section++</span><br><span class="line">        <span class="keyword">const</span> sectionInfo = <span class="keyword">this</span>.book.section(<span class="keyword">this</span>.section)</span><br><span class="line">        <span class="keyword">if</span>(sectionInfo&amp;&amp;sectionInfo.href)&#123;</span><br><span class="line">            <span class="keyword">this</span>.book.rendition.display(sectionInfo.href).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.refreshLocation</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 刷新进度条方法</span></span><br><span class="line">refreshLocation()&#123;</span><br><span class="line">    <span class="keyword">const</span> currentLocation = <span class="keyword">this</span>.book.rendition.currentLocation()</span><br><span class="line">    <span class="keyword">const</span> progress = <span class="keyword">this</span>.book.locations.percentageFromCfi(currentLocation.start.cfi)</span><br><span class="line">    <span class="keyword">this</span>.progress = progress</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取章节名称</span></span><br><span class="line">getSectionName()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.section)&#123;</span><br><span class="line">        <span class="keyword">const</span> sectionInfo = <span class="keyword">this</span>.book.section(<span class="keyword">this</span>.section)</span><br><span class="line">        <span class="keyword">if</span>(sectionInfo&amp;&amp;sectionInfo.href)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.book.navigation.get(sectionInfo.href).label</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="目录功能"><a href="#目录功能" class="headerlink" title="目录功能"></a>目录功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解析电子书信息</span></span><br><span class="line">parseBook()&#123;</span><br><span class="line">    <span class="comment">// 解析电子书封面</span></span><br><span class="line">    <span class="keyword">this</span>.book.loaded.cover.then(<span class="function"><span class="params">cover</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.book.archive.createUrl(cover).then(<span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.url = url</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 解析其他信息</span></span><br><span class="line">    <span class="keyword">this</span>.book.loaded.metadata.then(<span class="function"><span class="params">metadata</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.metadata = metadata</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 解析目录</span></span><br><span class="line">    <span class="keyword">this</span>.book.loaded.navigation.then(<span class="function"><span class="params">nav</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">flatten</span>(<span class="params">array</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">const</span> arr = array.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> [].concat([item, ...flatten(item.subitems)])</span><br><span class="line">            &#125;)</span><br><span class="line">           	<span class="keyword">let</span> res = []</span><br><span class="line">            arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">			res.push(...item)</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.nav = flatten(nav.toc)</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">item, level = <span class="number">0</span></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!item.parent)&#123;</span><br><span class="line">                <span class="keyword">return</span> level</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> find(<span class="keyword">this</span>.nav.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.id === item.parent)[<span class="number">0</span>],level++)</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">this</span>.nav.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">                item.level = find(item)</span><br><span class="line">         &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">doSearch(q) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">       <span class="keyword">this</span>.book.spine.spineItems.map(<span class="function"><span class="params">item</span> =&gt;</span> item.load(book.load.bind(book)).then(item.find.bind(item, q)).finally(item.unload.bind(item)))</span><br><span class="line">    ).then(<span class="function"><span class="params">results</span> =&gt;</span> <span class="built_in">Promise</span>.resolve([].concat.apply([], results)));</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 搜索后高亮显示</span></span><br><span class="line">search()&#123;</span><br><span class="line">    <span class="keyword">this</span>.doSearch(<span class="keyword">this</span>.searchText).then(<span class="function"><span class="params">list</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.searchList = list</span><br><span class="line">        <span class="keyword">this</span>.searchList.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            item.excerpt = item.excerpt.replace(<span class="keyword">this</span>.searchText, <span class="string">`&lt;span class="highlight"&gt;<span class="subst">$&#123;<span class="keyword">this</span>.searchText&#125;</span>&lt;/span&gt;`</span>)</span><br><span class="line">            <span class="comment">// item还有一个cfi可以用来跳转</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 跳转后高亮</span></span><br><span class="line"><span class="keyword">this</span>.book.rendition.annotations.highlight(cfi)</span><br></pre></td></tr></table></figure>
+
+<h4 id="书签功能"><a href="#书签功能" class="headerlink" title="书签功能"></a>书签功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">addBookmark()&#123;</span><br><span class="line">    <span class="keyword">const</span> currentLocation = <span class="keyword">this</span>.book.rendition.currentLocation()</span><br><span class="line">    <span class="keyword">const</span> cfibase = currentLocation.start.cfi.replace(<span class="regexp">/!.*/</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> cfistart = currentLocation.start.cfi.replace(<span class="regexp">/.*!/</span>, <span class="string">''</span>).replace(<span class="regexp">/\)/</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> cfiend = currentLocation.end.cfi.replace(<span class="regexp">/.*!/</span>, <span class="string">''</span>).replace(<span class="regexp">/\)/</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> cfirange = <span class="string">`<span class="subst">$&#123;cfibase&#125;</span>!,<span class="subst">$&#123;cfistart&#125;</span>,<span class="subst">$&#123;cfiend&#125;</span>`</span></span><br><span class="line">    <span class="keyword">this</span>.book.getRange(cfirange).then(<span class="function"><span class="params">range</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> text = range.toString().replace(<span class="regexp">/\s\s/g</span>, <span class="string">''</span>)</span><br><span class="line">        <span class="keyword">this</span>.bookmark.push(&#123;</span><br><span class="line">            cfi: currentLocation.start.cfi,</span><br><span class="line">            text</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="从当前章节获得进度"><a href="#从当前章节获得进度" class="headerlink" title="从当前章节获得进度"></a>从当前章节获得进度</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getProgress (index) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="built_in">Math</span>.floor(<span class="keyword">this</span>.currentBook.locations.percentageFromCfi(<span class="keyword">this</span>.currentBook.section(index).cfiFromRange()) * <span class="number">100</span>)&#125;</span>%`</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/ajax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -610,7 +753,9 @@ history.forward()</code></pre>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#39;amfe-flexible&#x2F;index.js&#39;</span><br></pre></td></tr></table></figure>
 
 <p>在postcss.config.js文件内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">        &#39;autoprefixer&#39;: &#123;</span><br><span class="line">            browsers: [&#39;Android&gt;&#x3D;4.0&#39;, &#39;iOS&gt;&#x3D;7&#39;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#39;postcss-pxtorem&#39;: &#123;</span><br><span class="line">            rootValue: 37.5,</span><br><span class="line">            propList: [&#39;*&#39;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">        &#39;autoprefixer&#39;: &#123;</span><br><span class="line">            overrideBrowserslist: [&#39;Android&gt;&#x3D;4.0&#39;, &#39;iOS&gt;&#x3D;7&#39;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#39;postcss-pxtorem&#39;: &#123;</span><br><span class="line">            rootValue: 37.5,</span><br><span class="line">            propList: [&#39;*&#39;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决移动端点击延迟300ms问题"><a href="#解决移动端点击延迟300ms问题" class="headerlink" title="解决移动端点击延迟300ms问题"></a>解决移动端点击延迟300ms问题</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html&#123;</span><br><span class="line">	touch-action: manipulation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1488,160 +1633,6 @@ history.forward()</code></pre>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/js/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="meixiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="meixiang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/08/js/" itemprop="url">js基础知识-变量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-08T00:00:00+08:00">
-                2019-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-
-<h2 id="变量类型和计算"><a href="#变量类型和计算" class="headerlink" title="变量类型和计算"></a>变量类型和计算</h2><h3 id="typeof-能判断那些类型"><a href="#typeof-能判断那些类型" class="headerlink" title="typeof 能判断那些类型"></a>typeof 能判断那些类型</h3><ul>
-<li>typeof能识别所有的值类型</li>
-<li>能识别出函数</li>
-<li>判断是否是引用类型</li>
-</ul>
-<h3 id="何时使用-何时使用"><a href="#何时使用-何时使用" class="headerlink" title="何时使用 === 何时使用 =="></a>何时使用 === 何时使用 ==</h3><ul>
-<li>判断是不是null的时候用==, 其余用===</li>
-<li>a == null 相当于 a === null || a === undefined</li>
-</ul>
-<p>###值类型和引用类型的区别</p>
-<ul>
-<li><p>值类型有 undefined, Number, String, Boolean, Symbol</p>
-</li>
-<li><p>引用类型: 对象, 数组, 函数, null, (h函数是一个特殊的引用类型, 它不用于存储数据)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;<span class="attr">x</span>: <span class="number">100</span>, <span class="attr">y</span>: <span class="number">200</span>&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = obj1</span><br><span class="line">obj2.x = <span class="number">101</span></span><br><span class="line"><span class="keyword">let</span> x1 = obj1.x</span><br><span class="line">x1 = <span class="number">102</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1) <span class="comment">// &#123;x: 101, y:200&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>​</p>
-</li>
-</ul>
-<h3 id="手写深拷贝"><a href="#手写深拷贝" class="headerlink" title="手写深拷贝"></a>手写深拷贝</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    age: <span class="number">20</span>,</span><br><span class="line">    name: <span class="string">'xxx'</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        city: <span class="string">'xxx'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    arr: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj == <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="comment">// obj不是对象和数组</span></span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> result</span><br><span class="line">    <span class="keyword">if</span>(obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">        result = []</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.hasOwnProperty(key))&#123;</span><br><span class="line">            <span class="comment">// 保证key不是原型的属性</span></span><br><span class="line">            <span class="comment">// 递归</span></span><br><span class="line">            result[key] = deepClone(obj[key])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="变量计算-类型转化"><a href="#变量计算-类型转化" class="headerlink" title="变量计算-类型转化"></a>变量计算-类型转化</h3><ul>
-<li><p>字符串拼接</p>
-</li>
-<li><p>==</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> == <span class="string">'100'</span> <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>if语句和逻辑运算</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line">!!a <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> || <span class="number">1</span> <span class="comment">//1</span></span><br><span class="line"><span class="number">10</span> &amp;&amp; <span class="number">0</span> <span class="comment">// 0</span></span><br><span class="line"><span class="number">0</span> &amp;&amp; <span class="number">10</span> <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-
-<p>​</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1692,7 +1683,7 @@ history.forward()</code></pre>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1714,7 +1705,7 @@ history.forward()</code></pre>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

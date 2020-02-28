@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>epubjs相关api</title>
+    <url>/2020/12/25/epub/</url>
+    <content><![CDATA[<h4 id="阅读器的解析和渲染"><a href="#阅读器的解析和渲染" class="headerlink" title="阅读器的解析和渲染"></a>阅读器的解析和渲染</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Epub <span class="keyword">from</span> <span class="string">'epubjs'</span></span><br><span class="line">global.epub = Epub</span><br><span class="line">methods: &#123;</span><br><span class="line">    initEpub()&#123;</span><br><span class="line">        <span class="comment">// 获取book对象</span></span><br><span class="line">        <span class="keyword">this</span>.book = <span class="keyword">new</span> Epub(url)</span><br><span class="line">        <span class="comment">// 渲染电子书</span></span><br><span class="line">       <span class="keyword">this</span>.rendition =  <span class="keyword">this</span>.book.renderTo(<span class="string">'read'</span>,&#123;</span><br><span class="line">            width: innerWidth,</span><br><span class="line">            height: innerHeight,</span><br><span class="line">            method: <span class="string">'default'</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">this</span>.rendition.display()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="阅读器翻页功能"><a href="#阅读器翻页功能" class="headerlink" title="阅读器翻页功能"></a>阅读器翻页功能</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给阅读器绑定方法</span></span><br><span class="line"><span class="keyword">this</span>.rendition.on(<span class="string">'touchstart'</span>, event =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">this</span>.rendition.on(<span class="string">'touchend'</span>, event =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 阅读器左翻页</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.rendition)&#123;</span><br><span class="line">    <span class="keyword">this</span>.rendition.prev()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 右翻页</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.rendition)&#123;</span><br><span class="line">    <span class="keyword">this</span>.rendition.next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字号设置功能"><a href="#字号设置功能" class="headerlink" title="字号设置功能"></a>字号设置功能</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.book.rendition.themes.fontSize(fontSize)</span><br></pre></td></tr></table></figure>
+
+<h4 id="字体设置功能"><a href="#字体设置功能" class="headerlink" title="字体设置功能"></a>字体设置功能</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给阅读器引入字体的css文件</span></span><br><span class="line"><span class="keyword">this</span>.rendition.hooks.content.register(<span class="function"><span class="params">contents</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 必须是url不能是路径</span></span><br><span class="line">    <span class="built_in">Promise</span>.all([</span><br><span class="line">        contents.addStylesheet(url)</span><br><span class="line">    ]).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">this</span>.book.rendition.themes.font(font)</span><br></pre></td></tr></table></figure>
+
+<h4 id="阅读器主题切换"><a href="#阅读器主题切换" class="headerlink" title="阅读器主题切换"></a>阅读器主题切换</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首先定义一个主题数组, 数组中是各个主题对象, 对象中要包含主题名称和主题样式</span></span><br><span class="line"><span class="keyword">this</span>.themeList.forEach(<span class="function"><span class="params">theme</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.rendition.themes.register(theme.name, theme.style)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 选择主题</span></span><br><span class="line"><span class="keyword">this</span>.book.rendition.themes.select(theme.name)</span><br></pre></td></tr></table></figure>
+
+<h4 id="动态切换全局样式"><a href="#动态切换全局样式" class="headerlink" title="动态切换全局样式"></a>动态切换全局样式</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addCss</span>(<span class="params">href</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">let</span> link = <span class="built_in">document</span>.getElementById(<span class="string">'link'</span>)</span><br><span class="line">   <span class="keyword">if</span>(!link)&#123;</span><br><span class="line">       link = <span class="built_in">document</span>.createElement(<span class="string">'link'</span>)</span><br><span class="line">        link.setAttribute(<span class="string">'id'</span>, <span class="string">'link'</span>)</span><br><span class="line">       link.setAttribute(<span class="string">'rel'</span>, <span class="string">'stylesheet'</span>)</span><br><span class="line">       link.setAttribute(<span class="string">'type'</span>, <span class="string">'text/css'</span>)</span><br><span class="line">       link.setAttribute(<span class="string">'href'</span> href)</span><br><span class="line">       <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(link)</span><br><span class="line">   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		link.setAttribute(<span class="string">'href'</span> href)</span><br><span class="line">   		</span><br><span class="line">   	&#125;</span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="阅读器进度相关api"><a href="#阅读器进度相关api" class="headerlink" title="阅读器进度相关api"></a>阅读器进度相关api</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首先实现分页</span></span><br><span class="line"><span class="keyword">this</span>.book.ready.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.book.locations.generate(<span class="number">750</span>*<span class="function">(<span class="params"><span class="built_in">window</span>.innerWidth<span class="regexp">/375)*(16/</span>fontSize</span>)).<span class="params">then</span>(<span class="params">(</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 设置可以拖动进度条</span></span><br><span class="line">        <span class="keyword">this</span>.bookAvailable = <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 该函数实现根据拖动条的百分比跳转电子书</span></span><br><span class="line">displayProgress()&#123;</span><br><span class="line">    <span class="keyword">const</span> cfi = <span class="keyword">this</span>.book.locations.cfiFromPercentage(<span class="keyword">this</span>.progress/<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">this</span>.book.rendition.display(cfi)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 上一章下一章进行跳转</span></span><br><span class="line">prevSection()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.section&gt;<span class="number">0</span>&amp;&amp;<span class="keyword">this</span>.bookAvailable)&#123;</span><br><span class="line">        <span class="keyword">this</span>.section--</span><br><span class="line">        <span class="keyword">const</span> sectionInfo = <span class="keyword">this</span>.book.section(<span class="keyword">this</span>.section)</span><br><span class="line">        <span class="keyword">if</span>(sectionInfo&amp;&amp;sectionInfo.href)&#123;</span><br><span class="line">            <span class="keyword">this</span>.book.rendition.display(sectionInfo.href).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// 刷新进度条</span></span><br><span class="line">                <span class="keyword">this</span>.refreshLocation()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">nextSection()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.section&lt;<span class="keyword">this</span>.book.spine.length<span class="number">-1</span>&amp;&amp;<span class="keyword">this</span>.bookAvailable)&#123;</span><br><span class="line">        <span class="keyword">this</span>.section++</span><br><span class="line">        <span class="keyword">const</span> sectionInfo = <span class="keyword">this</span>.book.section(<span class="keyword">this</span>.section)</span><br><span class="line">        <span class="keyword">if</span>(sectionInfo&amp;&amp;sectionInfo.href)&#123;</span><br><span class="line">            <span class="keyword">this</span>.book.rendition.display(sectionInfo.href).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.refreshLocation</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 刷新进度条方法</span></span><br><span class="line">refreshLocation()&#123;</span><br><span class="line">    <span class="keyword">const</span> currentLocation = <span class="keyword">this</span>.book.rendition.currentLocation()</span><br><span class="line">    <span class="keyword">const</span> progress = <span class="keyword">this</span>.book.locations.percentageFromCfi(currentLocation.start.cfi)</span><br><span class="line">    <span class="keyword">this</span>.progress = progress</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取章节名称</span></span><br><span class="line">getSectionName()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.section)&#123;</span><br><span class="line">        <span class="keyword">const</span> sectionInfo = <span class="keyword">this</span>.book.section(<span class="keyword">this</span>.section)</span><br><span class="line">        <span class="keyword">if</span>(sectionInfo&amp;&amp;sectionInfo.href)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.book.navigation.get(sectionInfo.href).label</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="目录功能"><a href="#目录功能" class="headerlink" title="目录功能"></a>目录功能</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 解析电子书信息</span></span><br><span class="line">parseBook()&#123;</span><br><span class="line">    <span class="comment">// 解析电子书封面</span></span><br><span class="line">    <span class="keyword">this</span>.book.loaded.cover.then(<span class="function"><span class="params">cover</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.book.archive.createUrl(cover).then(<span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.url = url</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 解析其他信息</span></span><br><span class="line">    <span class="keyword">this</span>.book.loaded.metadata.then(<span class="function"><span class="params">metadata</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.metadata = metadata</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 解析目录</span></span><br><span class="line">    <span class="keyword">this</span>.book.loaded.navigation.then(<span class="function"><span class="params">nav</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">flatten</span>(<span class="params">array</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">const</span> arr = array.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> [].concat([item, ...flatten(item.subitems)])</span><br><span class="line">            &#125;)</span><br><span class="line">           	<span class="keyword">let</span> res = []</span><br><span class="line">            arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">			res.push(...item)</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.nav = flatten(nav.toc)</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">item, level = <span class="number">0</span></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!item.parent)&#123;</span><br><span class="line">                <span class="keyword">return</span> level</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> find(<span class="keyword">this</span>.nav.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.id === item.parent)[<span class="number">0</span>],level++)</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">this</span>.nav.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">                item.level = find(item)</span><br><span class="line">         &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">doSearch(q) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">       <span class="keyword">this</span>.book.spine.spineItems.map(<span class="function"><span class="params">item</span> =&gt;</span> item.load(book.load.bind(book)).then(item.find.bind(item, q)).finally(item.unload.bind(item)))</span><br><span class="line">    ).then(<span class="function"><span class="params">results</span> =&gt;</span> <span class="built_in">Promise</span>.resolve([].concat.apply([], results)));</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 搜索后高亮显示</span></span><br><span class="line">search()&#123;</span><br><span class="line">    <span class="keyword">this</span>.doSearch(<span class="keyword">this</span>.searchText).then(<span class="function"><span class="params">list</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.searchList = list</span><br><span class="line">        <span class="keyword">this</span>.searchList.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            item.excerpt = item.excerpt.replace(<span class="keyword">this</span>.searchText, <span class="string">`&lt;span class="highlight"&gt;<span class="subst">$&#123;<span class="keyword">this</span>.searchText&#125;</span>&lt;/span&gt;`</span>)</span><br><span class="line">            <span class="comment">// item还有一个cfi可以用来跳转</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 跳转后高亮</span></span><br><span class="line"><span class="keyword">this</span>.book.rendition.annotations.highlight(cfi)</span><br></pre></td></tr></table></figure>
+
+<h4 id="书签功能"><a href="#书签功能" class="headerlink" title="书签功能"></a>书签功能</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">addBookmark()&#123;</span><br><span class="line">    <span class="keyword">const</span> currentLocation = <span class="keyword">this</span>.book.rendition.currentLocation()</span><br><span class="line">    <span class="keyword">const</span> cfibase = currentLocation.start.cfi.replace(<span class="regexp">/!.*/</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> cfistart = currentLocation.start.cfi.replace(<span class="regexp">/.*!/</span>, <span class="string">''</span>).replace(<span class="regexp">/\)/</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> cfiend = currentLocation.end.cfi.replace(<span class="regexp">/.*!/</span>, <span class="string">''</span>).replace(<span class="regexp">/\)/</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> cfirange = <span class="string">`<span class="subst">$&#123;cfibase&#125;</span>!,<span class="subst">$&#123;cfistart&#125;</span>,<span class="subst">$&#123;cfiend&#125;</span>`</span></span><br><span class="line">    <span class="keyword">this</span>.book.getRange(cfirange).then(<span class="function"><span class="params">range</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> text = range.toString().replace(<span class="regexp">/\s\s/g</span>, <span class="string">''</span>)</span><br><span class="line">        <span class="keyword">this</span>.bookmark.push(&#123;</span><br><span class="line">            cfi: currentLocation.start.cfi,</span><br><span class="line">            text</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="从当前章节获得进度"><a href="#从当前章节获得进度" class="headerlink" title="从当前章节获得进度"></a>从当前章节获得进度</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">getProgress (index) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="built_in">Math</span>.floor(<span class="keyword">this</span>.currentBook.locations.percentageFromCfi(<span class="keyword">this</span>.currentBook.section(index).cfiFromRange()) * <span class="number">100</span>)&#125;</span>%`</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>epubjs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack和babel</title>
+    <url>/2020/02/28/webpack-pro/</url>
+    <content><![CDATA[<h4 id="前端代码为什么进行构建和打包"><a href="#前端代码为什么进行构建和打包" class="headerlink" title="前端代码为什么进行构建和打包"></a>前端代码为什么进行构建和打包</h4><h4 id="module-chunk-bundle-的区别"><a href="#module-chunk-bundle-的区别" class="headerlink" title="module chunk bundle 的区别"></a>module chunk bundle 的区别</h4><h4 id="webpack如何实现懒加载"><a href="#webpack如何实现懒加载" class="headerlink" title="webpack如何实现懒加载"></a>webpack如何实现懒加载</h4><h4 id="webpack常见性能优化"><a href="#webpack常见性能优化" class="headerlink" title="webpack常见性能优化"></a>webpack常见性能优化</h4><h4 id="webpack的基本配置"><a href="#webpack的基本配置" class="headerlink" title="webpack的基本配置"></a>webpack的基本配置</h4><h5 id="拆分配置和merge"><a href="#拆分配置和merge" class="headerlink" title="拆分配置和merge"></a>拆分配置和merge</h5>]]></content>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql常用语句</title>
+    <url>/2020/02/27/sql/</url>
+    <content><![CDATA[<p>use myblog;</p>
+<p>– show tables;</p>
+<p>– insert into users(username, <code>password</code>, realname) values(‘lisi’,’123’, ‘李四’);</p>
+<p>– select * from users;</p>
+<p>– select id, username from users</p>
+<p>– select * from users where <code>password</code> like ‘%1%’ order by id desc;</p>
+<p>– update users set realname=”李四2” where username=’lisi’;<br>– delete from users where username=”lisi”;<br>– select * from users;<br>– pdate users set state=’0’ where username=”lisi”;</p>
+]]></content>
+      <tags>
+        <tag>sql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试真题</title>
+    <url>/2020/02/25/practice/</url>
+    <content><![CDATA[<h4 id="var-和-let-const的区别"><a href="#var-和-let-const的区别" class="headerlink" title="var 和 let const的区别"></a>var 和 let const的区别</h4><ul>
+<li>var 存在变量提升</li>
+<li>let const存在块级作用域</li>
+</ul>
+<h4 id="typeof返回哪些类型"><a href="#typeof返回哪些类型" class="headerlink" title="typeof返回哪些类型"></a>typeof返回哪些类型</h4><ul>
+<li>undefined string number symbol boolean</li>
+<li>object</li>
+<li>function</li>
+</ul>
+<h4 id="列举强制类型转换和隐式类型转换"><a href="#列举强制类型转换和隐式类型转换" class="headerlink" title="列举强制类型转换和隐式类型转换"></a>列举强制类型转换和隐式类型转换</h4><ul>
+<li>强制: parseInt parseFloat toString</li>
+<li>隐式: if 逻辑运算, ==, +拼接字符串</li>
+</ul>
+<h4 id="手写深度比较"><a href="#手写深度比较" class="headerlink" title="手写深度比较"></a>手写深度比较</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断是否是对象或数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> obj === <span class="string">'object'</span> &amp;&amp; obj !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 全相等</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEqual</span>(<span class="params">obj1, obj2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isObject(obj1) || !isObject(obj2)) <span class="keyword">return</span> obj1 === obj2</span><br><span class="line">    <span class="keyword">if</span>(obj1 === obj2) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment">// 1 先取出obj1和obj2的keys比较个数</span></span><br><span class="line">    <span class="keyword">const</span> obj1Keys = <span class="built_in">Object</span>.keys(obj1)</span><br><span class="line">    <span class="keyword">const</span> obj2Keys = <span class="built_in">Object</span>.keys(obj2)</span><br><span class="line">    <span class="keyword">if</span>(obj1Keys !== obj2Keys) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> obj1)&#123;</span><br><span class="line">        <span class="keyword">const</span> res = isEqual(obj1[key], obj2[key])</span><br><span class="line">        <span class="keyword">if</span>(!res) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="split和join的区别"><a href="#split和join的区别" class="headerlink" title="split和join的区别"></a>split和join的区别</h4><ul>
+<li>互为逆运算</li>
+</ul>
+<h4 id="数组的pop-push-unshift-shift分别做什么"><a href="#数组的pop-push-unshift-shift分别做什么" class="headerlink" title="数组的pop push unshift shift分别做什么"></a>数组的pop push unshift shift分别做什么</h4><ul>
+<li>纯函数: 1. 不改变原数组, 2. 返回一个数组</li>
+<li>纯函数: slice, concat, map, filter</li>
+<li>非纯函数: pop, push, shift, unshift, forEach, some, every, reduce</li>
+</ul>
+<h4 id="数组slice和splice的区别"><a href="#数组slice和splice的区别" class="headerlink" title="数组slice和splice的区别"></a>数组slice和splice的区别</h4><h4 id="10-20-30-map-parseInt-的返回结果"><a href="#10-20-30-map-parseInt-的返回结果" class="headerlink" title="[10,20,30].map(parseInt)的返回结果"></a>[10,20,30].map(parseInt)的返回结果</h4><ul>
+<li>[10,NaN, NaN]</li>
+</ul>
+<h4 id="ajax-gethe-post请求的区别"><a href="#ajax-gethe-post请求的区别" class="headerlink" title="ajax, gethe post请求的区别"></a>ajax, gethe post请求的区别</h4><ul>
+<li>get一般用于查询, post一般用于提交</li>
+<li>get参数拼接在url上, post放在请求体内(数据体积可以更大)</li>
+<li>安全性, post易于防止xsrf</li>
+</ul>
+<h4 id="call和apply的区别"><a href="#call和apply的区别" class="headerlink" title="call和apply的区别"></a>call和apply的区别</h4><ul>
+<li>参数</li>
+</ul>
+<h4 id="事件代理委托是什么"><a href="#事件代理委托是什么" class="headerlink" title="事件代理委托是什么"></a>事件代理委托是什么</h4><h4 id="闭包是什么-有什么特性-有何影响"><a href="#闭包是什么-有什么特性-有何影响" class="headerlink" title="闭包是什么 有什么特性 有何影响"></a>闭包是什么 有什么特性 有何影响</h4><ul>
+<li>变量会常驻内存, 得不到释放</li>
+</ul>
+<h4 id="如何阻止事件冒泡和默认行为"><a href="#如何阻止事件冒泡和默认行为" class="headerlink" title="如何阻止事件冒泡和默认行为"></a>如何阻止事件冒泡和默认行为</h4><ul>
+<li>event.stopPropagation()</li>
+<li>event.preventDefault()</li>
+</ul>
+<h4 id="查找-添加-删除-移动DOM节点的方法"><a href="#查找-添加-删除-移动DOM节点的方法" class="headerlink" title="查找, 添加, 删除, 移动DOM节点的方法"></a>查找, 添加, 删除, 移动DOM节点的方法</h4><h4 id="如何减少DOM操作"><a href="#如何减少DOM操作" class="headerlink" title="如何减少DOM操作"></a>如何减少DOM操作</h4><ul>
+<li>缓存DOM查询结果</li>
+<li>多次DOM操作一次插入</li>
+</ul>
+<h4 id="jsonp的原理-为什么他不是真正的ajax"><a href="#jsonp的原理-为什么他不是真正的ajax" class="headerlink" title="jsonp的原理, 为什么他不是真正的ajax"></a>jsonp的原理, 为什么他不是真正的ajax</h4><h4 id="函数声明和函数表达式的区别"><a href="#函数声明和函数表达式的区别" class="headerlink" title="函数声明和函数表达式的区别"></a>函数声明和函数表达式的区别</h4><ul>
+<li>函数声明会在代码执行前进行预加载, 而函数表达式则不会</li>
+</ul>
+<h4 id="new-Object-和-Object-create-的区别"><a href="#new-Object-和-Object-create-的区别" class="headerlink" title="new Object() 和 Object.create()的区别"></a>new Object() 和 Object.create()的区别</h4><ul>
+<li>字面量等同于new Object() 原型是Object.prototype</li>
+<li>Object.create(null) 没有原型</li>
+</ul>
+<h4 id="字符串-字母开头-后面字母数字下划线-长度6-30"><a href="#字符串-字母开头-后面字母数字下划线-长度6-30" class="headerlink" title="字符串, 字母开头, 后面字母数字下划线, 长度6-30"></a>字符串, 字母开头, 后面字母数字下划线, 长度6-30</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> reg = <span class="regexp">/^[a-zA-Z]\w&#123;5,29&#125;$/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="手写字符串trim方法-保证浏览器兼容性"><a href="#手写字符串trim方法-保证浏览器兼容性" class="headerlink" title="手写字符串trim方法, 保证浏览器兼容性"></a>手写字符串trim方法, 保证浏览器兼容性</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.trim = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/^\s+/</span>, <span class="string">''</span>).replace(<span class="regexp">/\s+$/</span>, <span class="string">''</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="如何获取最大值"><a href="#如何获取最大值" class="headerlink" title="如何获取最大值"></a>如何获取最大值</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMax</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> nums = [...arguments]</span><br><span class="line">    <span class="keyword">let</span> max = nums[<span class="number">0</span>]</span><br><span class="line">    nums.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(item &gt;max)&#123;</span><br><span class="line">            max = item</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> max</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="什么是json"><a href="#什么是json" class="headerlink" title="什么是json"></a>什么是json</h4><ul>
+<li>json是一种数据格式, 本质是一段字符串</li>
+<li>json格式和js对象结构一致, 对js语言更友好</li>
+<li>window.JSON是一个全局对象: JSON.stringify, JSON.parse</li>
+</ul>
+<h4 id="获取当前页面url参数"><a href="#获取当前页面url参数" class="headerlink" title="获取当前页面url参数"></a>获取当前页面url参数</h4><ul>
+<li><p>传统方式: location.search</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">query</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> search = location.search.substr(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">`(^|&amp;)<span class="subst">$&#123;name&#125;</span>=([^&amp;]*)(&amp;|$)`</span>, <span class="string">'i'</span>)</span><br><span class="line">    <span class="keyword">const</span> res = search.match(reg)</span><br><span class="line">    <span class="keyword">if</span>(res === <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res[<span class="number">2</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>URLSearchParams</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">query</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> search = location.search</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> URLSearchParams(search)</span><br><span class="line">    <span class="keyword">return</span> p.get(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="将url参数解析为js对象"><a href="#将url参数解析为js对象" class="headerlink" title="将url参数解析为js对象"></a>将url参数解析为js对象</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queryToObj</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> search = location.search.substr(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">const</span> res= &#123;&#125;</span><br><span class="line">    search.split(<span class="string">'&amp;'</span>).forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> arr = item.split(<span class="string">'='</span>)</span><br><span class="line">        res[arr[<span class="number">0</span>]] =  arr[<span class="number">1</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="拍平数组"><a href="#拍平数组" class="headerlink" title="拍平数组"></a>拍平数组</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flatten</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">     arr.forEach(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(item))&#123;</span><br><span class="line">         arr.splice(index, <span class="number">1</span>, ...flatten(item))   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">set</span> = new Set(arr)</span><br><span class="line">    return [...<span class="keyword">set</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function fn1(arr)&#123;</span><br><span class="line">    <span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">    arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(obj[item])&#123;</span><br><span class="line">            obj[item]++</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            obj[item] = <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(obj)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能优化</title>
+    <url>/2020/02/25/xingneng/</url>
+    <content><![CDATA[<h4 id="性能优化原则"><a href="#性能优化原则" class="headerlink" title="性能优化原则"></a>性能优化原则</h4><ul>
+<li>多实用内存, 缓存或其他方法</li>
+<li>减少CPU计算量, 减少网络加载耗时</li>
+</ul>
+<h4 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h4><ul>
+<li>加载更快<ul>
+<li>减少资源体积: 压缩代码</li>
+<li>减少访问次数, 合并代码, ssr, 缓存<ul>
+<li>静态资源加hash后缀, 根据文件内容计算hash</li>
+<li>文件内容不变, 则hash不变, 则url不变</li>
+<li>url和文件不变, 则会自动触发http缓存机制, 返回304</li>
+</ul>
+</li>
+<li>使用更快的网络, CDN</li>
+</ul>
+</li>
+<li>渲染更快<ul>
+<li>CSS放在head, JS放在body最下面</li>
+<li>尽早开始执行JS, 用DOMContentLoaded触发</li>
+<li>懒加载</li>
+<li>对DOM查询进行缓存</li>
+<li>频繁操作DOM, 合并到一起插入DOM结构</li>
+<li>节流throttle, 防抖debounce</li>
+</ul>
+</li>
+</ul>
+<h4 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay = <span class="number">100</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer)&#123;</span><br><span class="line">            clearTimeout(timer)</span><br><span class="line">        &#125;</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;,delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">input.addEventListener(<span class="string">'keyup'</span>, debounce(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(input.value)</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<h4 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay=<span class="number">100</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer) <span class="keyword">return</span> </span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-渲染机制</title>
+    <url>/2020/02/25/paint/</url>
+    <content><![CDATA[<h4 id="从输入url到渲染出页面的整个过程"><a href="#从输入url到渲染出页面的整个过程" class="headerlink" title="从输入url到渲染出页面的整个过程"></a>从输入url到渲染出页面的整个过程</h4><ul>
+<li>加载资源</li>
+<li>渲染页面</li>
+</ul>
+<h4 id="window-onload和DOMContentLoaded的区别"><a href="#window-onload和DOMContentLoaded的区别" class="headerlink" title="window.onload和DOMContentLoaded的区别"></a>window.onload和DOMContentLoaded的区别</h4><ul>
+<li>前者资源全部加载完才执行, 包括图片</li>
+<li>后者是在dom渲染完成就执行, 图片可能尚未下载</li>
+</ul>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>加载资源的形式<ul>
+<li>html代码</li>
+<li>媒体文件</li>
+<li>js css</li>
+</ul>
+</li>
+<li>加载资源的过程<ul>
+<li>DNS解析: 域名 —&gt; IP地址</li>
+<li>浏览器根据IP地址向服务器发起http请求</li>
+<li>服务器处理请求, 并返回给浏览器</li>
+</ul>
+</li>
+<li>渲染页面的过程<ul>
+<li>根据HTML代码生成DOM树</li>
+<li>根据CSS代码生成CSSOM</li>
+<li>将DOM树和CSSOM整合成Render Tree</li>
+<li>根据Render Tree渲染页面</li>
+<li>遇到script则暂停渲染, 优先加载并执行JS代码, 完成再继续</li>
+<li>直至把Render Tree渲染完成</li>
+</ul>
+</li>
+</ul>
+<h4 id="为何把css放在head中"><a href="#为何把css放在head中" class="headerlink" title="为何把css放在head中"></a>为何把css放在head中</h4><h4 id><a href="#" class="headerlink" title></a></h4>]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-BOM</title>
+    <url>/2020/02/20/js-bom/</url>
+    <content><![CDATA[<h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h3 id="如何识别浏览器类型"><a href="#如何识别浏览器类型" class="headerlink" title="如何识别浏览器类型"></a>如何识别浏览器类型</h3><ul>
+<li><p>navigator</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ua = navigator.userAgent</span><br><span class="line"><span class="keyword">const</span> isChrome = ua.indexOf(<span class="string">'Chrome'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><pre><code class="javascript"><span class="built_in">console</span>.log(screen.width, screnn.height)
+
+<span class="built_in">console</span>.log(location.href) <span class="comment">// 网址</span>
+<span class="built_in">console</span>.log(location.protocol) <span class="comment">// 协议 http:</span>
+<span class="built_in">console</span>.log(location.host) <span class="comment">// 域名</span>
+<span class="built_in">console</span>.log(location.search) <span class="comment">// 查询参数</span>
+<span class="built_in">console</span>.log(location.hash) <span class="comment">// 哈希</span>
+history.back()
+history.forward()</code></pre>
+</li>
+</ul>
+<h3 id="分析拆解url各个部分"><a href="#分析拆解url各个部分" class="headerlink" title="分析拆解url各个部分"></a>分析拆解url各个部分</h3>]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优雅引入vant-ui</title>
+    <url>/2020/02/19/vant-ui/</url>
+    <content><![CDATA[<h4 id="安装vant"><a href="#安装vant" class="headerlink" title="安装vant"></a>安装vant</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i vant -S</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装babel-plugin-import"><a href="#安装babel-plugin-import" class="headerlink" title="安装babel-plugin-import"></a>安装babel-plugin-import</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i babel-plugin-import -D</span><br></pre></td></tr></table></figure>
+
+<p>在 babel.config.js文件里</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    presets: [</span><br><span class="line">        &#39;@vue&#x2F;app&#39;</span><br><span class="line">    ],</span><br><span class="line">    plugins: [</span><br><span class="line">        [</span><br><span class="line">            &#39;import&#39;, &#123;</span><br><span class="line">                libraryName: &#39;vant&#39;,</span><br><span class="line">                libraryDirectory: &#39;es&#39;,</span><br><span class="line">                style: true</span><br><span class="line">            &#125;,</span><br><span class="line">             &#39;vant&#39;</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123;Button&#125; from &#39;vant&#39;</span><br><span class="line">Vue.use(Button)</span><br></pre></td></tr></table></figure>
+
+<h4 id="vant的rem适配"><a href="#vant的rem适配" class="headerlink" title="vant的rem适配"></a>vant的rem适配</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i postcss-pxtorem --save-dev</span><br><span class="line">npm i -S amfe-flexible</span><br></pre></td></tr></table></figure>
+
+<p>在main.js中引入amfe-flexible</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#39;amfe-flexible&#x2F;index.js&#39;</span><br></pre></td></tr></table></figure>
+
+<p>在postcss.config.js文件内</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">        &#39;autoprefixer&#39;: &#123;</span><br><span class="line">            overrideBrowserslist: [&#39;Android&gt;&#x3D;4.0&#39;, &#39;iOS&gt;&#x3D;7&#39;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#39;postcss-pxtorem&#39;: &#123;</span><br><span class="line">            rootValue: 37.5,</span><br><span class="line">            propList: [&#39;*&#39;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决移动端点击延迟300ms问题"><a href="#解决移动端点击延迟300ms问题" class="headerlink" title="解决移动端点击延迟300ms问题"></a>解决移动端点击延迟300ms问题</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line">html&#123;</span><br><span class="line">	touch-action: manipulation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>vant-ui</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安全</title>
+    <url>/2019/12/20/safe/</url>
+    <content><![CDATA[<h4 id="常见的web前端攻击方式有哪些"><a href="#常见的web前端攻击方式有哪些" class="headerlink" title="常见的web前端攻击方式有哪些"></a>常见的web前端攻击方式有哪些</h4><ul>
+<li>xss跨站请求攻击<ul>
+<li>在网站中嵌入script脚本</li>
+<li>脚本内容: 获取cookie, 发送到我的服务器(服务器配合跨域)</li>
+<li>替换特殊字符, 如&lt;变为&amp;lt, 这样script就不会作为脚本执行</li>
+<li>前端要替换, 后端也要替换</li>
+</ul>
+</li>
+<li>xsrf跨站请求伪造<ul>
+<li>正在购物, 商品id是100</li>
+<li>对方向你发送电子邮件</li>
+<li>邮件中隐藏着 &lt;img src=xxx.com/pay?id=200/&gt;</li>
+<li>你一查看,就会帮对方购买</li>
+<li>使用post接口</li>
+<li>增加验证, 例如密码, 验证码等</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack</title>
+    <url>/2019/12/20/webpack/</url>
+    <content><![CDATA[<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i webpack -g</span><br></pre></td></tr></table></figure>
+
+<h4 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h4><ul>
+<li>将main.js打包成bundle.js</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">webpack .&#x2F;src&#x2F;main.js .&#x2F;dist&#x2F;bundle.js</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建webpack-config-js"><a href="#新建webpack-config-js" class="headerlink" title="新建webpack.config.js"></a>新建webpack.config.js</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">'./src/main.js'</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">'dist'</span>), <span class="comment">// 绝对路径</span></span><br><span class="line">        filename: <span class="string">'bundle.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后终端直接输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">webpack</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以进行打包</p>
+<h4 id="命令映射"><a href="#命令映射" class="headerlink" title="命令映射"></a>命令映射</h4><p>本地安装webpack</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i webpack -D</span><br></pre></td></tr></table></figure>
+
+<p>打开package.json</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">        <span class="attr">"build"</span>: <span class="string">"webpack"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理css文件"><a href="#处理css文件" class="headerlink" title="处理css文件"></a>处理css文件</h4><p>安装css-loader (负责css文件的加载)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D css-loader</span><br></pre></td></tr></table></figure>
+
+<p>安装style-loader(将样式添加到dom中)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D style-loader</span><br></pre></td></tr></table></figure>
+
+<p>在webpack.config.js中进行配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="comment">// 使用多个loader时, 从右向左读</span></span><br><span class="line">                use: [<span class="string">'style.loader'</span>, <span class="string">'css-loader'</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理css预编译语言"><a href="#处理css预编译语言" class="headerlink" title="处理css预编译语言"></a>处理css预编译语言</h4><p>安装 node-sass, sass-loader</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i node-sass sass-loader -D</span><br></pre></td></tr></table></figure>
+
+<p>webpack.config.js文件中</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.scss$/</span>,</span><br><span class="line">                <span class="comment">// 使用多个loader时, 从右向左读</span></span><br><span class="line">                use: [<span class="string">'style.loader'</span>, <span class="string">'css-loader'</span>, <span class="string">'sass-loader'</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理图片"><a href="#处理图片" class="headerlink" title="处理图片"></a>处理图片</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D url-loader</span><br><span class="line">npm i -D file-loader</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        output:&#123;</span><br><span class="line">            publicPath: <span class="string">'dist/'</span> <span class="comment">//设置完htmlwebpackplugin后删掉</span></span><br><span class="line">        &#125;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.(png|jpg|gif|jpeg)$/</span>,</span><br><span class="line">                use: [&#123;</span><br><span class="line">                    loader: <span class="string">'url-loader'</span>,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                    	<span class="comment">// 当加载的图片小于limit时, 会将图片编译成base64</span></span><br><span class="line">                        <span class="comment">// 当加载的图片大于limit时, 会将图片用file-loader解析</span></span><br><span class="line">                        limit: <span class="number">8192</span>,</span><br><span class="line">        			   name: <span class="string">'img/[name].[hash:8].[ext]'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    </span><br><span class="line">                &#125;]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="es6语法处理"><a href="#es6语法处理" class="headerlink" title="es6语法处理"></a>es6语法处理</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D babel-loader@7 babel-core babel-preset-es2015</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports =&#123;</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                exclude: <span class="regexp">/(node_modules|bower_components)/</span>,</span><br><span class="line">                use: [&#123;</span><br><span class="line">                    loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">                    opations: &#123;</span><br><span class="line">                        presets: [<span class="string">'es2015'</span>]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="引入vue-js"><a href="#引入vue-js" class="headerlink" title="引入vue.js"></a>引入vue.js</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i vue -S</span><br><span class="line">npm i vue-loader@13.0.0 vue-template-compiler -D</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.vue$/</span>,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: <span class="string">'vue-loader'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">	&#125;</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        extensions: [<span class="string">'.js'</span>, <span class="string">'.vue'</span>]</span><br><span class="line">        alias: &#123;</span><br><span class="line">            <span class="string">"vue$"</span>: <span class="string">'vue/dist/vue.esm.js'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加版权的plugin"><a href="#添加版权的plugin" class="headerlink" title="添加版权的plugin"></a>添加版权的plugin</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> webpack.BannerPlugin(<span class="string">'最终版权归aaa所有'</span>)</span><br><span class="line">    ]</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="HRMLWebpackPlugin"><a href="#HRMLWebpackPlugin" class="headerlink" title="HRMLWebpackPlugin"></a>HRMLWebpackPlugin</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D html-webpack-plugin</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const HtmlWebpackPlugin  &#x3D; retuire(&#39;html-webpack-plugin&#39;)</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">	plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: &#39;index.html&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="js压缩插件"><a href="#js压缩插件" class="headerlink" title="js压缩插件"></a>js压缩插件</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i uglifyjs-webpack-plugin -D</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const uglifyjswebpackplugin &#x3D; require(&#39;uglifyjs-webpack-plugin&#39;)</span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">        new uglifyjswebpackplugin()</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="搭建本地服务器"><a href="#搭建本地服务器" class="headerlink" title="搭建本地服务器"></a>搭建本地服务器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i webpack-dev-server -D</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        contentBase: &#39;.&#x2F;dist&#39;,</span><br><span class="line">        inline: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;scripts&quot;: &#123;</span><br><span class="line">        &quot;dev&quot;: &quot;webpack-dev-server&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux常用命令</title>
+    <url>/2019/12/05/linux/</url>
+    <content><![CDATA[<ul>
+<li>1 本地登录到线上机器 ssh <a href="mailto:work@192.168.10.21">work@192.168.10.21</a></li>
+<li>2 查看文件夹 ls ll</li>
+<li>3 查看文件夹下所有文件 ls -a</li>
+<li>4 清屏 clear</li>
+<li>5 创建文件夹 mkdir ###</li>
+<li>6 删除文件夹 rm -rf ###</li>
+</ul>
+<ul>
+<li>7 进入目录 cd ###</li>
+</ul>
+<ul>
+<li>8 修改文件名 mv 原名 新名</li>
+</ul>
+<ul>
+<li>9 移动文件 mv 文件名 目录地址</li>
+</ul>
+<ul>
+<li>10 拷贝 cp 源文件 新文件</li>
+</ul>
+<ul>
+<li>11 删文件 rm ###</li>
+</ul>
+<ul>
+<li>12 新建文件 touch ### 或者 vi ### 后者会进入vim编辑器</li>
+</ul>
+<ul>
+<li>13 vim 操作 i 写文件 esc :wq  强制退出:q!</li>
+</ul>
+<ul>
+<li>14 查看文件 vim / vi ###</li>
+</ul>
+<ul>
+<li>15 打印文件内容 cat ### 打印前面几行 head ### 后面几行tail ###</li>
+<li>16  查找文件内容 grep 关键字 文件名</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git速查表</title>
+    <url>/2019/11/13/git/</url>
+    <content><![CDATA[<p><img src="/2019/11/13/git/Git%E9%80%9F%E6%9F%A5.jpg" alt="Git速查"></p>
+]]></content>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>storage存储</title>
+    <url>/2019/11/01/storage/</url>
+    <content><![CDATA[<h4 id="描述cookie-localStorage-sessionStorage的区别"><a href="#描述cookie-localStorage-sessionStorage的区别" class="headerlink" title="描述cookie localStorage sessionStorage的区别"></a>描述cookie localStorage sessionStorage的区别</h4><ul>
+<li>cookie:<ul>
+<li>本身用于浏览器和server通讯</li>
+<li>被借用到本地存储起来</li>
+<li>document.cookie = ‘a=100;b=200’来修改</li>
+<li>api比较怪异</li>
+<li>存储太小, 最大4kb</li>
+<li>http请求时需要发送到服务端, 增加请求数据量</li>
+</ul>
+</li>
+<li>localStorage和sessionStorage<ul>
+<li>H5专门为存储设计的, 最大可存5M</li>
+<li>api简单易用, setItem, getItem</li>
+<li>不会随着http请求被发送出去</li>
+<li>localStorage数据会永久存储, 除非代码或手动删除</li>
+<li>sessionStorage数据只存在于当前会话, 浏览器关闭则清空</li>
+<li>一般用localStorage会多一些</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ajax</title>
+    <url>/2019/10/20/ajax/</url>
+    <content><![CDATA[<h4 id="手写一个简易的ajax"><a href="#手写一个简易的ajax" class="headerlink" title="手写一个简易的ajax"></a>手写一个简易的ajax</h4><ul>
+<li><p>XMLHttpRequest</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'/api'</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            alert(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'其他情况'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send(<span class="literal">null</span>)</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'/api'</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            alert(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send(<span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">   username: <span class="string">'zs'</span>     </span><br><span class="line">&#125;))</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttprequest()</span><br><span class="line">            xhr.open(<span class="string">'GET'</span>, <span class="string">'/api'</span>, <span class="literal">true</span>)</span><br><span class="line">            xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">                        resolve(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.status === <span class="number">404</span>)&#123;</span><br><span class="line">                        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'404 not found'</span>))</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xhr.send(<span class="literal">null</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>readyState<ul>
+<li>0: 还没有调用send()方法</li>
+<li>1:  载入, 以调用send方法,正在发送请求</li>
+<li>2: send()方法执行完成, 已经接受到全部响应内容</li>
+<li>3: 正在解析响应内容</li>
+<li>4: 响应内容解析完成, 可以在客户端调用</li>
+</ul>
+</li>
+<li>status<ul>
+<li>2xx- 表示成功处理请求</li>
+<li>3xx- 需要重定向, 浏览器直接跳转, 如: 301永远重定向, 302临时重定向 ,304资源为改变, 调用缓存</li>
+<li>4xx- 客户端请求错误, 404地址输入错误, 403没有权限</li>
+<li>5xx - 服务端错误</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="跨域的常用解决方案"><a href="#跨域的常用解决方案" class="headerlink" title="跨域的常用解决方案"></a>跨域的常用解决方案</h4><ul>
+<li><p>同源策略-跨域解决方案</p>
+<ul>
+<li>ajax请求时, 浏览器要求当前网页和server必须同源(安全)</li>
+<li>同源: 协议, 域名, 端口, 三者必须一致</li>
+<li>加载图片, css, js可无视同源策略</li>
+</ul>
+</li>
+<li><p>JSONP</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.callback = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">           <span class="built_in">console</span>.log(data)</span></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://localhost:8002/jsonp.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cors跨域</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-事件</title>
+    <url>/2019/09/04/js-event/</url>
+    <content><![CDATA[<h2 id="事件绑定和时间冒泡"><a href="#事件绑定和时间冒泡" class="headerlink" title="事件绑定和时间冒泡"></a>事件绑定和时间冒泡</h2><h3 id="编写一个通用的事件监听函数"><a href="#编写一个通用的事件监听函数" class="headerlink" title="编写一个通用的事件监听函数"></a>编写一个通用的事件监听函数</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通用的事件绑定函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">elem, type, fn</span>)</span>&#123;</span><br><span class="line">    elem.addEventListener(type, fn)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> btn1 = <span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>)</span><br><span class="line">bindEvent(btn1, <span class="string">'click'</span>, event =&gt; &#123;</span><br><span class="line">    event.preventDefault()<span class="comment">// 阻止默认行为</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改进</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">elem, type, fn, selector</span>)</span>&#123;</span><br><span class="line">    elem.addEventListener(type. event =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> target = event.target</span><br><span class="line">        <span class="keyword">if</span>(selector)&#123;</span><br><span class="line">         <span class="comment">// 代理</span></span><br><span class="line">            <span class="keyword">if</span>(target.matches(selector))&#123;</span><br><span class="line">                fn.call(target, event)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="comment">// 普通</span></span><br><span class="line">            fn.call(target, event)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="描述事件冒泡的流程"><a href="#描述事件冒泡的流程" class="headerlink" title="描述事件冒泡的流程"></a>描述事件冒泡的流程</h3><ul>
+<li>捕获, 触发, 冒泡</li>
+<li>event.stopPropagation()阻止冒泡</li>
+</ul>
+<h3 id="无限上拉列表-如何监听每个图片的点击"><a href="#无限上拉列表-如何监听每个图片的点击" class="headerlink" title="无限上拉列表, 如何监听每个图片的点击"></a>无限上拉列表, 如何监听每个图片的点击</h3><ul>
+<li>事件代理</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-DOM</title>
+    <url>/2019/08/21/js-dom/</url>
+    <content><![CDATA[<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h3 id="DOM属于哪种数据结构"><a href="#DOM属于哪种数据结构" class="headerlink" title="DOM属于哪种数据结构"></a>DOM属于哪种数据结构</h3><ul>
+<li>DOM的本质是树</li>
+</ul>
+<h3 id="DOM操作常用的API"><a href="#DOM操作常用的API" class="headerlink" title="DOM操作常用的API"></a>DOM操作常用的API</h3><ul>
+<li><p>节点操作</p>
+</li>
+<li><p>attr</p>
+</li>
+<li><p>property</p>
+</li>
+<li><p>​</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.red</span> &#123;</span></span><br><span class="line">            color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1578153369665&amp;di=780b8356bdec149b97abef75be6b45e8&amp;imgtype=0&amp;src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F65e3502debf55f28d75b38be57f11ea21c4fe3a966a87-A0Nrbe_fw658"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'div1'</span>, div1)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> divList = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'divList'</span>, divList)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> containerList = 				       		  <span class="built_in">document</span>.getElementsByClassName(<span class="string">'container'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'containerList'</span>, containerList)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> pList = <span class="built_in">document</span>.querySelectorAll(<span class="string">'p'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'pList'</span>, pList)</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">//property 形式</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> p1 = pList[<span class="number">0</span>]</span></span><br><span class="line"><span class="actionscript">        p1.style.width = <span class="string">'100px'</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(p1.style.width)</span></span><br><span class="line"><span class="actionscript">        p1.className = <span class="string">'red'</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(p1.className)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(p1.nodeName) <span class="comment">//P</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(p1.nodeType) <span class="comment">//1</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">//attribute</span></span></span><br><span class="line"><span class="actionscript">        p1.setAttribute(<span class="string">'data-name'</span>, <span class="string">'imooc'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(p1.getAttribute(<span class="string">'data-name'</span>))</span></span><br><span class="line"><span class="actionscript">        p1.setAttribute(<span class="string">'style'</span>, <span class="string">'fontSize: 50px;'</span>)</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dom结构操作</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-class">.red</span> &#123;</span></span><br><span class="line">            color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p1"</span>&gt;</span>一段文字1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1578153369665&amp;di=780b8356bdec149b97abef75be6b45e8&amp;imgtype=0&amp;src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F65e3502debf55f28d75b38be57f11ea21c4fe3a966a87-A0Nrbe_fw658"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> div2 = <span class="built_in">document</span>.getElementById(<span class="string">'div2'</span>)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//新建节点</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> newP = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>)</span></span><br><span class="line"><span class="actionscript">        newP.innerHTML = <span class="string">"this is newP"</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//插入节点</span></span></span><br><span class="line">        div1.appendChild(newP)</span><br><span class="line"><span class="actionscript">        <span class="comment">//移动节点</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> p1 = <span class="built_in">document</span>.getElementById(<span class="string">'p1'</span>)</span></span><br><span class="line">        div2.appendChild(p1)</span><br><span class="line"><span class="actionscript">        <span class="comment">//获取父元素</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(p1.parentNode)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//获取子元素列表</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> div1ChildNodes = div1.childNodes</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(div1ChildNodes)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> div1ChildNodesP = <span class="built_in">Array</span>.prototype.slice.call(div1ChildNodes).filter(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</span></span><br><span class="line">            if(child.nodeType === 1)&#123;</span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span> <span class="literal">true</span></span></span><br><span class="line"><span class="actionscript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span> <span class="literal">false</span></span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(div1ChildNodesP)</span></span><br><span class="line"></span><br><span class="line">        div1.removeChild(div1ChildNodesP[0])</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<h3 id="attr和property的区别"><a href="#attr和property的区别" class="headerlink" title="attr和property的区别"></a>attr和property的区别</h3><ul>
+<li>property修改对象属性,  不会体现到html结构中,</li>
+<li>attr修改html属性, 会改变html结构</li>
+</ul>
+<h3 id="一次性插入多个DOM节点-考虑性能"><a href="#一次性插入多个DOM节点-考虑性能" class="headerlink" title="一次性插入多个DOM节点, 考虑性能"></a>一次性插入多个DOM节点, 考虑性能</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> frag = <span class="built_in">document</span>.createDocumentFragment()</span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span>; i++)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">const</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>)</span></span><br><span class="line"><span class="javascript">            li.innerHTML = <span class="string">`List item <span class="subst">$&#123;i&#125;</span>`</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//先插入到文档片段中</span></span></span><br><span class="line">            frag.appendChild(li)</span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript">        <span class="comment">// 都完成之后再统一插入</span></span></span><br><span class="line">        list.appendChild(frag)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-异步和单线程</title>
+    <url>/2019/08/20/js-yibu/</url>
+    <content><![CDATA[<h2 id="异步和单线程"><a href="#异步和单线程" class="headerlink" title="异步和单线程"></a>异步和单线程</h2><h3 id="同步和异步的区别是什么"><a href="#同步和异步的区别是什么" class="headerlink" title="同步和异步的区别是什么"></a>同步和异步的区别是什么</h3><ul>
+<li>单线程和异步<ul>
+<li>JS是单线程语言, 只能同时做一件事</li>
+<li>遇到等待不能卡住(请求资源)</li>
+</ul>
+</li>
+<li>应用场景<ul>
+<li>网络请求</li>
+<li>定时任务</li>
+</ul>
+</li>
+<li>异步不会导致代码的阻塞</li>
+</ul>
+<h3 id="手写Promise加载一张图片"><a href="#手写Promise加载一张图片" class="headerlink" title="手写Promise加载一张图片"></a>手写Promise加载一张图片</h3><ul>
+<li>callback hell和Promise</li>
+</ul>
+<pre><code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">'XXXXXX'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadImg</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> img = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>)</span><br><span class="line">        img.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(img)</span><br><span class="line">        &#125;</span><br><span class="line">        img.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`图片加载失败<span class="subst">$&#123;url&#125;</span>`</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        img.src = url</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loadingImg(url).then(<span class="function"><span class="params">img</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(img.width)</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></code></pre><p>  ​</p>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-作用域和闭包</title>
+    <url>/2019/08/19/js-zuoyongyu/</url>
+    <content><![CDATA[<h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><a id="more"></a>
+
+<h3 id="this的不同应用场景-如何取值"><a href="#this的不同应用场景-如何取值" class="headerlink" title="this的不同应用场景, 如何取值"></a>this的不同应用场景, 如何取值</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">fn1() <span class="comment">// window</span></span><br><span class="line"></span><br><span class="line">fn1.call(&#123;<span class="attr">x</span>:<span class="number">100</span>&#125;) <span class="comment">//&#123;x:100&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123;<span class="attr">x</span>: <span class="number">200</span>&#125;)</span><br><span class="line">fn2() <span class="comment">//&#123;x: 200&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="手写bind函数"><a href="#手写bind函数" class="headerlink" title="手写bind函数"></a>手写bind函数</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind1 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将参数变为数组</span></span><br><span class="line">    <span class="keyword">const</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)</span><br><span class="line">    <span class="comment">// 获取this</span></span><br><span class="line">    <span class="keyword">const</span> t = args.shift()</span><br><span class="line">    <span class="keyword">const</span> self = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> self.apply(t, args)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="built_in">Function</span>.prototype.call1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   	<span class="keyword">const</span> args = [...arguments]</span><br><span class="line">   	<span class="keyword">const</span> t = args.shift()</span><br><span class="line"> 	t.fn = <span class="keyword">this</span></span><br><span class="line">   	<span class="keyword">const</span> result = t.fn()</span><br><span class="line">   	<span class="keyword">delete</span> t.fn</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">Function</span>.prototype.apply1 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> args = [...arguments]</span><br><span class="line">    <span class="keyword">const</span> t = args.shift()</span><br><span class="line">    t.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">const</span> result = t.fn()</span><br><span class="line">    <span class="keyword">delete</span> t.fn</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="实际开发中使用闭包的场景"><a href="#实际开发中使用闭包的场景" class="headerlink" title="实际开发中使用闭包的场景"></a>实际开发中使用闭包的场景</h3><ul>
+<li><p>函数作为参数被传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="number">200</span></span><br><span class="line">    fn() <span class="comment">// 100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="number">100</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+<li><p>函数作为返回值被返回</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> fn = create()</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">200</span></span><br><span class="line">fn() <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所有自由变量的查找是在函数定义的地方, 向上级作用域查找</p>
+</li>
+<li><p>闭包的应用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 闭包隐藏数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCache</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> data = &#123;&#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="keyword">set</span>: function (key, value) &#123;</span><br><span class="line">            data[key] = value</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">get</span>: function (key) &#123;</span><br><span class="line">            <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> c = createCache()</span><br><span class="line">c.set(<span class="string">'a'</span>, <span class="number">100</span>)</span><br><span class="line">c.get(<span class="string">'a'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><ul>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础-原型和原型链</title>
+    <url>/2019/08/01/js-1/</url>
+    <content><![CDATA[<h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><a id="more"></a>
+
+<h3 id="如何判断一个变量是不是数组"><a href="#如何判断一个变量是不是数组" class="headerlink" title="如何判断一个变量是不是数组"></a>如何判断一个变量是不是数组</h3><ul>
+<li>类型判断-instanceof<ul>
+<li>后面的构造函数的原型对象在前面实例的原型链上就返回true, 否则就返回false</li>
+</ul>
+</li>
+</ul>
+<h3 id="手写一个简易的jQuery-考虑插件和扩展性"><a href="#手写一个简易的jQuery-考虑插件和扩展性" class="headerlink" title="手写一个简易的jQuery, 考虑插件和扩展性"></a>手写一个简易的jQuery, 考虑插件和扩展性</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JQuery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(selector)&#123;</span><br><span class="line">        <span class="keyword">const</span> result = <span class="built_in">document</span>.querySelectorAll(selector)</span><br><span class="line">        <span class="keyword">const</span> length = result.length</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++)&#123;</span><br><span class="line">            <span class="keyword">this</span>[i] = result[i]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.length = result.length</span><br><span class="line">        <span class="keyword">this</span>.selector = selector</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span>(index)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>[index]</span><br><span class="line">    &#125;</span><br><span class="line">    each(fn)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt; <span class="keyword">this</span>.length; i++)&#123;</span><br><span class="line">            <span class="keyword">const</span> elem = <span class="keyword">this</span>[i]</span><br><span class="line">            fn(elem)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    on(type, fn)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="params">elem</span> =&gt;</span> &#123;</span><br><span class="line">            elem.addEventListener(type, fn, <span class="literal">false</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插件</span></span><br><span class="line">JQuery.prototype.dialog = <span class="function"><span class="keyword">function</span> (<span class="params">info</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(info)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 造轮子</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myJQuery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(selector)&#123;</span><br><span class="line">		<span class="keyword">super</span>(selector)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 扩展自己的方法</span></span><br><span class="line">    addClass()&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="class的原型本质-怎么理解"><a href="#class的原型本质-怎么理解" class="headerlink" title="class的原型本质, 怎么理解"></a>class的原型本质, 怎么理解</h3><ul>
+<li><p>class原型</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name, number)&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        <span class="keyword">this</span>.number = number</span><br><span class="line">    &#125;</span><br><span class="line">    sayHi() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`姓名<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>, 学号<span class="subst">$&#123;<span class="keyword">this</span>.number&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> xiaoluo = <span class="keyword">new</span> Student(<span class="string">'夏洛'</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">console</span>.log(xiaoluo.name) <span class="comment">// 夏洛</span></span><br><span class="line">xiaoluo.sayHi() <span class="comment">// 姓名夏洛, 学号100</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>class继承</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    eat()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'吃东西'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name, number)&#123;</span><br><span class="line">        <span class="keyword">super</span>(name)</span><br><span class="line">        <span class="keyword">this</span>.number = number</span><br><span class="line">    &#125;</span><br><span class="line">    sayHi()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span><span class="subst">$&#123;<span class="keyword">this</span>.number&#125;</span>sayHi`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> xialuo = <span class="keyword">new</span> Student(<span class="string">'夏洛'</span>, <span class="number">100</span>)</span><br><span class="line">xialuo.eat() <span class="comment">// 夏洛吃东西</span></span><br><span class="line">xialuo.sayHi() <span class="comment">// 夏洛100sayHi</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js基础知识-变量</title>
+    <url>/2019/07/08/js/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h2 id="变量类型和计算"><a href="#变量类型和计算" class="headerlink" title="变量类型和计算"></a>变量类型和计算</h2><h3 id="typeof-能判断那些类型"><a href="#typeof-能判断那些类型" class="headerlink" title="typeof 能判断那些类型"></a>typeof 能判断那些类型</h3><ul>
+<li>typeof能识别所有的值类型</li>
+<li>能识别出函数</li>
+<li>判断是否是引用类型</li>
+</ul>
+<h3 id="何时使用-何时使用"><a href="#何时使用-何时使用" class="headerlink" title="何时使用 === 何时使用 =="></a>何时使用 === 何时使用 ==</h3><ul>
+<li>判断是不是null的时候用==, 其余用===</li>
+<li>a == null 相当于 a === null || a === undefined</li>
+</ul>
+<p>###值类型和引用类型的区别</p>
+<ul>
+<li><p>值类型有 undefined, Number, String, Boolean, Symbol</p>
+</li>
+<li><p>引用类型: 对象, 数组, 函数, null, (h函数是一个特殊的引用类型, 它不用于存储数据)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;<span class="attr">x</span>: <span class="number">100</span>, <span class="attr">y</span>: <span class="number">200</span>&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = obj1</span><br><span class="line">obj2.x = <span class="number">101</span></span><br><span class="line"><span class="keyword">let</span> x1 = obj1.x</span><br><span class="line">x1 = <span class="number">102</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1) <span class="comment">// &#123;x: 101, y:200&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<h3 id="手写深拷贝"><a href="#手写深拷贝" class="headerlink" title="手写深拷贝"></a>手写深拷贝</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    age: <span class="number">20</span>,</span><br><span class="line">    name: <span class="string">'xxx'</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        city: <span class="string">'xxx'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    arr: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj == <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="comment">// obj不是对象和数组</span></span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> result</span><br><span class="line">    <span class="keyword">if</span>(obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">        result = []</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.hasOwnProperty(key))&#123;</span><br><span class="line">            <span class="comment">// 保证key不是原型的属性</span></span><br><span class="line">            <span class="comment">// 递归</span></span><br><span class="line">            result[key] = deepClone(obj[key])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="变量计算-类型转化"><a href="#变量计算-类型转化" class="headerlink" title="变量计算-类型转化"></a>变量计算-类型转化</h3><ul>
+<li><p>字符串拼接</p>
+</li>
+<li><p>==</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">100</span> == <span class="string">'100'</span> <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>if语句和逻辑运算</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line">!!a <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> || <span class="number">1</span> <span class="comment">//1</span></span><br><span class="line"><span class="number">10</span> &amp;&amp; <span class="number">0</span> <span class="comment">// 0</span></span><br><span class="line"><span class="number">0</span> &amp;&amp; <span class="number">10</span> <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mpvue项目搭建</title>
+    <url>/2019/05/07/mpvue/</url>
+    <content><![CDATA[<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>该项目使用mpvue框架开发小程序，使用vuex进行状态管理，使用mpvue-router-patch进行路由管理，使用flyio进行数据请求</p>
+<a id="more"></a>
+
+<h1 id="1-项目初始化"><a href="#1-项目初始化" class="headerlink" title="1. 项目初始化"></a>1. 项目初始化</h1><p>第一步，基于mpvue-quickstart模板创建新项目</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vue init mpvue&#x2F;mpvue-quickstart my-project</span><br></pre></td></tr></table></figure>
+
+<p>第二步，安装依赖和运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd my-project</span><br><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p>第三步，打开微信开发者工具，设置AppId，勾选“不校验合法域名”，此外一定要勾选es6转es5</p>
+<h2 id="集成vant-weapp组件库"><a href="#集成vant-weapp组件库" class="headerlink" title="集成vant-weapp组件库"></a>集成vant-weapp组件库</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i vant-weapp -S</span><br></pre></td></tr></table></figure>
+
+<h3 id="引入组件"><a href="#引入组件" class="headerlink" title="引入组件"></a>引入组件</h3><p>在app.json中输入以下内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">“usingComponents”: &#123;</span><br><span class="line">    &quot;van-button&quot;: &quot;@vant&#x2F;weapp&#x2F;dist&#x2F;button&#x2F;index&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的是vant-weapp的路径并不总是@vant/weapp，也有可能时vant-weapp/，所以要在node_modules中自行查看路径</p>
+<h3 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;van-button type&#x3D;&quot;primary&quot;&gt;按钮&lt;&#x2F;van-button&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改构建配置"><a href="#修改构建配置" class="headerlink" title="修改构建配置"></a>修改构建配置</h3><p>这里由于打包之后会导致组件所在路径和引入的路径不一致，所以要修改打包之后的路径，在webpack.base.config.js的最后填上如下代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/^wx$/</span>.test(PLATFORM)) &#123;</span><br><span class="line">  baseWebpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">      <span class="keyword">new</span> CopyWebpackPlugin([&#123;</span><br><span class="line">        <span class="keyword">from</span>: resolve(<span class="string">'node_modules/@vant/weapp/dist'</span>),</span><br><span class="line">        to: resolve(<span class="string">'dist/wx/@vant/weapp/dist'</span>),</span><br><span class="line">        ignore: [<span class="string">'.*'</span>]</span><br><span class="line">      &#125;])</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样这里的路径要和引入组件的路径设置为一致</p>
+<h2 id="集成-scss"><a href="#集成-scss" class="headerlink" title="集成 scss"></a>集成 scss</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D node-sass</span><br><span class="line">npm i -D sass-loader@7.3.1 &#x2F;&#x2F;注意一定要退回7.3.1版本</span><br></pre></td></tr></table></figure>
+
+<p>这里一定要安装7.3.1的sass-loader</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style lang&#x3D;&quot;scss&quot; scoped&gt;</span><br><span class="line">  .img &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="集成mpvue-router-patch插件"><a href="#集成mpvue-router-patch插件" class="headerlink" title="集成mpvue-router-patch插件"></a>集成mpvue-router-patch插件</h2><h3 id="安装依赖-1"><a href="#安装依赖-1" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -S mpvue-router-patch</span><br></pre></td></tr></table></figure>
+
+<h3 id="引入并挂载"><a href="#引入并挂载" class="headerlink" title="引入并挂载"></a>引入并挂载</h3><p>在入口文件main.js中引入并挂在路由组件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入路由</span></span><br><span class="line"><span class="keyword">import</span> MpvueRouterPatch <span class="keyword">from</span> <span class="string">'mpvue-router-patch'</span></span><br><span class="line"><span class="comment">// 挂载路由</span></span><br><span class="line">Vue.use(MpvueRouterPatch)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">this.$router.push(&#39;&#x2F;pages&#x2F;categoryList&#x2F;main&#39;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="集成flyio"><a href="#集成flyio" class="headerlink" title="集成flyio"></a>集成flyio</h2><h3 id="安装依赖-2"><a href="#安装依赖-2" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -S flyio</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><p>在工具类下新建request.js文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入flyio</span></span><br><span class="line"><span class="keyword">import</span> Fly <span class="keyword">from</span> <span class="string">'flyio/dist/npm/wx'</span></span><br><span class="line"><span class="comment">// 封装</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFly</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (mpvuePlatform === <span class="string">'wx'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Fly()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建fly实例</span></span><br><span class="line"><span class="keyword">const</span> fly = createFly()</span><br><span class="line"><span class="comment">// 配置请求默认地址</span></span><br><span class="line">fly.config.baseURL = <span class="string">'https://test.youbaobao.xyz:18081/'</span></span><br><span class="line"><span class="comment">// 封装并导出请求函数 这个函数的目的是为了在组件中一个$http就可以解决所有请求问题</span></span><br><span class="line"><span class="comment">// 也可以使用 Vue.prototype.$http = fly 但是这样在调用的时候存在this问题,</span></span><br><span class="line"><span class="comment">// 而且很难封装错误处理, 而这个函数在组件中可以直接用async await来调用, 而且以后可以在</span></span><br><span class="line"><span class="comment">// 这里进行错误处理的封装</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意 fly与axios的不同:</span></span><br><span class="line"><span class="comment">// 1. axios.defaults.baseURL fly.config,baseURL</span></span><br><span class="line"><span class="comment">// 2. axios.get(url, &#123;params: &#123;&#125;&#125;) fly.get(url, &#123;&#125;)</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">$http</span> (<span class="params">type, url, params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">'get'</span>) &#123;</span><br><span class="line">      fly.get(url, params).then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(response)</span><br><span class="line">      &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        reject(err)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fly.post(url, params).then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(response)</span><br><span class="line">      &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        reject(err)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>实战项目</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>实战</tag>
+        <tag>小程序</tag>
+        <tag>mpvue</tag>
+      </tags>
+  </entry>
+</search>

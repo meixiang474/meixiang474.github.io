@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="js基础," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -94,17 +94,12 @@
 
 
 
-<meta name="description" content="异步和单线程同步和异步的区别是什么 单线程和异步 JS是单线程语言, 只能同时做一件事 遇到等待不能卡住(请求资源)   应用场景 网络请求 定时任务   异步不会导致代码的阻塞  手写Promise加载一张图片 callback hell和Promise  12345678910111213141516171819const url &#x3D; &#39;XXXXXX&#39;function loadImg(url)">
-<meta property="og:type" content="article">
-<meta property="og:title" content="js基础-异步和单线程">
-<meta property="og:url" content="http://yoursite.com/2019/08/20/js-yibu/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="meixiang">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="meixiang">
-<meta property="og:description" content="异步和单线程同步和异步的区别是什么 单线程和异步 JS是单线程语言, 只能同时做一件事 遇到等待不能卡住(请求资源)   应用场景 网络请求 定时任务   异步不会导致代码的阻塞  手写Promise加载一张图片 callback hell和Promise  12345678910111213141516171819const url &#x3D; &#39;XXXXXX&#39;function loadImg(url)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-08-20T15:31:38.000Z">
-<meta property="article:modified_time" content="2020-02-19T16:20:26.885Z">
 <meta property="article:author" content="meixiang">
-<meta property="article:tag" content="js基础">
 <meta name="twitter:card" content="summary">
 
 
@@ -134,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/20/js-yibu/"/>
+  <link rel="canonical" href="http://yoursite.com/page/3/"/>
 
 
 
 
 
-  <title>js基础-异步和单线程 | meixiang</title>
+  <title>meixiang</title>
   
 
 
@@ -165,7 +160,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,9 +255,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -273,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/20/js-yibu/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/mpvue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="meixiang">
@@ -290,7 +287,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js基础-异步和单线程</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/07/mpvue/" itemprop="url">mpvue项目搭建</a></h1>
         
 
         <div class="post-meta">
@@ -302,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-20T23:31:38+08:00">
-                2019-08-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T22:33:45+08:00">
+                2019-05-07
               </time>
             
 
@@ -312,6 +311,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">实战项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -340,24 +361,16 @@
       
 
       
-        <h2 id="异步和单线程"><a href="#异步和单线程" class="headerlink" title="异步和单线程"></a>异步和单线程</h2><h3 id="同步和异步的区别是什么"><a href="#同步和异步的区别是什么" class="headerlink" title="同步和异步的区别是什么"></a>同步和异步的区别是什么</h3><ul>
-<li>单线程和异步<ul>
-<li>JS是单线程语言, 只能同时做一件事</li>
-<li>遇到等待不能卡住(请求资源)</li>
-</ul>
-</li>
-<li>应用场景<ul>
-<li>网络请求</li>
-<li>定时任务</li>
-</ul>
-</li>
-<li>异步不会导致代码的阻塞</li>
-</ul>
-<h3 id="手写Promise加载一张图片"><a href="#手写Promise加载一张图片" class="headerlink" title="手写Promise加载一张图片"></a>手写Promise加载一张图片</h3><ul>
-<li>callback hell和Promise</li>
-</ul>
-<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">'XXXXXX'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadImg</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> img = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>)</span><br><span class="line">        img.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(img)</span><br><span class="line">        &#125;</span><br><span class="line">        img.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`图片加载失败<span class="subst">$&#123;url&#125;</span>`</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        img.src = url</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loadingImg(url).then(<span class="function"><span class="params">img</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(img.width)</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></code></pre><p>  ​</p>
-
+        
+          <h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>该项目使用mpvue框架开发小程序，使用vuex进行状态管理，使用mpvue-router-patch进行路由管理，使用flyio进行数据请求</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/07/mpvue/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -372,40 +385,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/js%E5%9F%BA%E7%A1%80/" rel="tag"># js基础</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/08/19/js-zuoyongyu/" rel="next" title="js基础-作用域和闭包">
-                <i class="fa fa-chevron-left"></i> js基础-作用域和闭包
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/21/js-dom/" rel="prev" title="js基础-DOM">
-                js基础-DOM <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -415,11 +402,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -427,10 +417,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -451,17 +437,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -523,22 +500,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步和单线程"><span class="nav-number">1.</span> <span class="nav-text">异步和单线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步和异步的区别是什么"><span class="nav-number">1.1.</span> <span class="nav-text">同步和异步的区别是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手写Promise加载一张图片"><span class="nav-number">1.2.</span> <span class="nav-text">手写Promise加载一张图片</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -664,10 +625,10 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 

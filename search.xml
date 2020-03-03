@@ -33,6 +33,22 @@
       </tags>
   </entry>
   <entry>
+    <title>vuex和vue-router</title>
+    <url>/2020/03/03/vuex/</url>
+    <content><![CDATA[<h4 id="路由模式"><a href="#路由模式" class="headerlink" title="路由模式"></a>路由模式</h4><ul>
+<li>hash模式</li>
+<li>H5 history模式(需要server端支持)</li>
+</ul>
+<h4 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h4><ul>
+<li>动态路由</li>
+<li>懒加载</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>vuex/vue-router</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue高级</title>
     <url>/2020/03/01/vue-pro/</url>
     <content><![CDATA[<h4 id="自定义v-model"><a href="#自定义v-model" class="headerlink" title="自定义v-model"></a>自定义v-model</h4><ul>

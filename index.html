@@ -447,6 +447,261 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/vue-yuanli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/03/vue-yuanli/" itemprop="url">vue原理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-03T14:55:00+08:00">
+                2020-03-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="如何理解MVVM"><a href="#如何理解MVVM" class="headerlink" title="如何理解MVVM"></a>如何理解MVVM</h3><h4 id="组件化基础"><a href="#组件化基础" class="headerlink" title="组件化基础"></a>组件化基础</h4><h5 id="很久以前就有组件化"><a href="#很久以前就有组件化" class="headerlink" title="很久以前就有组件化"></a>很久以前就有组件化</h5><ul>
+<li>asp, jsp, php已经有组件化了</li>
+<li>nodejs中也有类似的组件化</li>
+</ul>
+<h5 id="数据驱动视图"><a href="#数据驱动视图" class="headerlink" title="数据驱动视图"></a>数据驱动视图</h5><ul>
+<li>传统组件, 只是静态渲染, 更新还要依赖于操作DOM</li>
+<li>数据驱动视图———–vue MVVM, react setState</li>
+</ul>
+<h5 id="vue-MVVM"><a href="#vue-MVVM" class="headerlink" title="vue MVVM"></a>vue MVVM</h5><p>view(dom) —— vue, viewModel(dom listener, directives) ——- model</p>
+<h3 id="Vue响应式"><a href="#Vue响应式" class="headerlink" title="Vue响应式"></a>Vue响应式</h3><ul>
+<li><p>Object.defineProperty实现响应式</p>
+</li>
+<li><p>监听对象, 监听数组</p>
+</li>
+<li><p>复杂对象, 深度监听</p>
+</li>
+<li><p>深度监听需要递归到底, 一次性计算量大</p>
+</li>
+<li><p>无法监听新增属性和删除属性, (Vue.set, Vue.delete)</p>
+</li>
+<li><p>无法原生监听数组, 需要做特殊处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateView</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'视图更新'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> oldArrayPrototype = <span class="built_in">Array</span>.prototype</span><br><span class="line"><span class="keyword">const</span> arrProto = <span class="built_in">Object</span>.create(oldArrayPrototype)</span><br><span class="line">[<span class="string">'push'</span>, <span class="string">'pop'</span>, <span class="string">'shift'</span>, <span class="string">'unshift'</span>].forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    arrProto[item] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        oldArrayProperty[item].call(<span class="keyword">this</span>, ...arguments)</span><br><span class="line">        updateView()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">target, key, value</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 实现深度监听</span></span><br><span class="line">    observer(value)</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(target, key, &#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue)&#123;</span><br><span class="line">            <span class="comment">// 新的值也要深度监听</span></span><br><span class="line">            observer(newValue)</span><br><span class="line">            <span class="keyword">if</span>(newValue !== value)&#123;</span><br><span class="line">                value = newValue</span><br><span class="line">                updateView()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observer</span>(<span class="params">target</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> target !== <span class="string">'object'</span> || target == <span class="literal">null</span>) <span class="keyword">return</span> target</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(target))&#123;</span><br><span class="line">        target.__proto__ = arrProto</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> target)&#123;</span><br><span class="line">        defineReactive(target, key, target[key])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="虚拟DOM和diff"><a href="#虚拟DOM和diff" class="headerlink" title="虚拟DOM和diff"></a>虚拟DOM和diff</h3><ul>
+<li>vdom是实现vue和react的重要基石</li>
+<li>diff算法是vdom中最核心, 最关键的部分</li>
+<li>DOM操作非常耗费性能</li>
+<li>虚拟dom过程<ul>
+<li>创建vnode</li>
+<li>patch(container, vnode)将虚拟dom渲染</li>
+<li>var newVnode 创建新的虚拟节点</li>
+<li>patch(vnode, newVnode) 更新</li>
+<li>patch(newVnode, null) 销毁</li>
+</ul>
+</li>
+<li>用js模拟DOM结构</li>
+<li>新旧vnode对比, 得到最小更新范围, 最后更新DOM</li>
+<li>数据驱动视图的模式下, 有效控制DOM操作</li>
+<li>vdom的存在价值: 数据驱动视图, 控制DOM操作</li>
+</ul>
+<h4 id="diff算法"><a href="#diff算法" class="headerlink" title="diff算法"></a>diff算法</h4><ul>
+<li>树diff的事件复杂度o(n^3)<ul>
+<li>第一, 遍历tree1, 第二, 遍历tree2</li>
+<li>第三排序</li>
+<li>算法不可用</li>
+</ul>
+</li>
+<li>优化事件复杂度到o(n)<ul>
+<li>只比较同一层级, 不再跨级比较</li>
+<li>tag不相同, 则直接删掉重建, 不再深度比较</li>
+<li>tag和key都相同, 则认为是相同节点, 不再深度比较</li>
+</ul>
+</li>
+</ul>
+<h4 id="snabbdom源码解读"><a href="#snabbdom源码解读" class="headerlink" title="snabbdom源码解读"></a>snabbdom源码解读</h4><ul>
+<li>h函数返回一个vnode</li>
+<li>patch函数<ul>
+<li>第一个参数不是vnode, 则创建一个空的vnode, 关联到这个dom元素</li>
+<li>两个参数是相同的vnode(tag和key都相同)执行patchVnode<ul>
+<li>vnode对比—-patchVnode函数<ul>
+<li>设置element, 给新的vnode复制成旧的vnode的element</li>
+<li>如果两者children相等, 则return</li>
+<li>如果旧有children, 新无children, 移除旧的children, 移除旧的text</li>
+<li>如果新旧都有children执行 updateChildren</li>
+<li>新有children, 旧无children, 将旧的text设置为空, 再将新的children添加进去</li>
+<li>如果新旧的text不相等, 先移除旧的children, 设置新的text</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不相同的vnode, 直接删掉重建</li>
+</ul>
+</li>
+<li>updateChildren<ul>
+<li>开始和开始</li>
+<li>结束和结束</li>
+<li>开始和结束</li>
+<li>结束和开始</li>
+<li>以上均调用patch函数</li>
+<li>未命中<ul>
+<li>新的key能否对应上oldCh中的某个key<ul>
+<li>没对应上, 直接重建插入</li>
+<li>对应上了, 拿到key对应的节点, 判断标签是否一样<ul>
+<li>不一样则重建插入</li>
+<li>一样的话, 则patch</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="模板编译"><a href="#模板编译" class="headerlink" title="模板编译"></a>模板编译</h4><ul>
+<li>模板编译为render函数, 执行render函数返回vnode</li>
+<li>基于vnode再执行patch 和diff</li>
+<li>使用webpack vue-loader, 会在开发环境下编译模板</li>
+</ul>
+<h4 id="组件渲染和更新过程"><a href="#组件渲染和更新过程" class="headerlink" title="组件渲染和更新过程"></a>组件渲染和更新过程</h4><ul>
+<li>初次渲染过程<ul>
+<li>解析为render函数(或在开发环境已经完成, vue-loader)</li>
+<li>触发响应式, 监听data属性getter setter</li>
+<li>执行render函数, 生成vnode, patch(elem, vnode)</li>
+</ul>
+</li>
+<li>更新过程<ul>
+<li>修改data, 触发setter</li>
+<li>重新执行render函数, 生成newVnode</li>
+<li>patch(vnode, newVnode)</li>
+</ul>
+</li>
+<li>异步渲染<ul>
+<li>汇总data修改, 一次性更新视图</li>
+<li>减少DOM操作次数, 提高性能</li>
+</ul>
+</li>
+</ul>
+<h4 id="前端路由原理"><a href="#前端路由原理" class="headerlink" title="前端路由原理"></a>前端路由原理</h4><ul>
+<li>hash的特点<ul>
+<li>hash变化会触发网页跳转, 即浏览器的前进和后退</li>
+<li>hash变化不会刷新页面, spa必须的特点</li>
+<li>hash永远不会提交到server端</li>
+<li>window.onhashchange</li>
+</ul>
+</li>
+<li>history模式<ul>
+<li>用url规范的路由, 但跳转不刷新页面</li>
+<li>history.pushState</li>
+<li>window.onpopstate</li>
+<li>需要后端支持</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/vuex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1717,140 +1972,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/js-bom/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="meixiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="meixiang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/20/js-bom/" itemprop="url">js基础-BOM</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-20T00:54:07+08:00">
-                2020-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h3 id="如何识别浏览器类型"><a href="#如何识别浏览器类型" class="headerlink" title="如何识别浏览器类型"></a>如何识别浏览器类型</h3><ul>
-<li><p>navigator</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ua = navigator.userAgent</span><br><span class="line"><span class="keyword">const</span> isChrome = ua.indexOf(<span class="string">'Chrome'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><pre><code class="javascript"><span class="built_in">console</span>.log(screen.width, screnn.height)
-
-<span class="built_in">console</span>.log(location.href) <span class="comment">// 网址</span>
-<span class="built_in">console</span>.log(location.protocol) <span class="comment">// 协议 http:</span>
-<span class="built_in">console</span>.log(location.host) <span class="comment">// 域名</span>
-<span class="built_in">console</span>.log(location.search) <span class="comment">// 查询参数</span>
-<span class="built_in">console</span>.log(location.hash) <span class="comment">// 哈希</span>
-history.back()
-history.forward()</code></pre>
-</li>
-</ul>
-<h3 id="分析拆解url各个部分"><a href="#分析拆解url各个部分" class="headerlink" title="分析拆解url各个部分"></a>分析拆解url各个部分</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1901,7 +2022,7 @@ history.forward()</code></pre>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1923,7 +2044,7 @@ history.forward()</code></pre>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

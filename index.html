@@ -447,6 +447,232 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/vue-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/05/vue-interview/" itemprop="url">vue-interview</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-05T15:36:29+08:00">
+                2020-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="v-show和v-if的区别"><a href="#v-show和v-if的区别" class="headerlink" title="v-show和v-if的区别"></a>v-show和v-if的区别</h4><ul>
+<li>v-show是通过CSS display控制显示和隐藏</li>
+<li>v-if是组件真正的渲染和销毁, 而不是显示和隐藏</li>
+<li>频繁切换显示状态用v-show, 否则用v-if</li>
+</ul>
+<h4 id="为何在v-for中使用key"><a href="#为何在v-for中使用key" class="headerlink" title="为何在v-for中使用key"></a>为何在v-for中使用key</h4><ul>
+<li>必须使用key, 而且不能是index和random</li>
+<li>diff算法中通过tag和key来判断是否是sameNode</li>
+<li>减少渲染次数, 提升渲染性能</li>
+</ul>
+<h4 id="描述Vue组件的声明周期-父子组件"><a href="#描述Vue组件的声明周期-父子组件" class="headerlink" title="描述Vue组件的声明周期(父子组件)"></a>描述Vue组件的声明周期(父子组件)</h4><h4 id="vue组件如何通讯"><a href="#vue组件如何通讯" class="headerlink" title="vue组件如何通讯"></a>vue组件如何通讯</h4><ul>
+<li>props, $emit</li>
+<li>自定义事件</li>
+<li>vuex</li>
+</ul>
+<h4 id="描述组件渲染和更新的过程"><a href="#描述组件渲染和更新的过程" class="headerlink" title="描述组件渲染和更新的过程"></a>描述组件渲染和更新的过程</h4><h4 id="双向数据绑定v-model的实现原理"><a href="#双向数据绑定v-model的实现原理" class="headerlink" title="双向数据绑定v-model的实现原理"></a>双向数据绑定v-model的实现原理</h4><ul>
+<li>input元素的value = this.name</li>
+<li>监听input事件this.name = $event.target.value</li>
+<li>data更新触发rerender</li>
+</ul>
+<h4 id="对MVVM的理解"><a href="#对MVVM的理解" class="headerlink" title="对MVVM的理解"></a>对MVVM的理解</h4><h4 id="computed有何特点"><a href="#computed有何特点" class="headerlink" title="computed有何特点"></a>computed有何特点</h4><ul>
+<li>缓存</li>
+<li>提高性能</li>
+</ul>
+<h4 id="为何组件data必须是一个函数"><a href="#为何组件data必须是一个函数" class="headerlink" title="为何组件data必须是一个函数"></a>为何组件data必须是一个函数</h4><ul>
+<li>防止数据互相污染</li>
+</ul>
+<h4 id="ajax请求应该放在哪个生命周期"><a href="#ajax请求应该放在哪个生命周期" class="headerlink" title="ajax请求应该放在哪个生命周期"></a>ajax请求应该放在哪个生命周期</h4><ul>
+<li>mounted</li>
+<li>js是单线程的, ajax异步获取数据</li>
+<li>放在前面没有用</li>
+</ul>
+<h4 id="如何将组件的所有props传给子组件"><a href="#如何将组件的所有props传给子组件" class="headerlink" title="如何将组件的所有props传给子组件"></a>如何将组件的所有props传给子组件</h4><ul>
+<li>v-bind=”$props”</li>
+</ul>
+<h4 id="如何自己实现v-model"><a href="#如何自己实现v-model" class="headerlink" title="如何自己实现v-model"></a>如何自己实现v-model</h4><h4 id="多个组件的相同逻辑-如何抽离"><a href="#多个组件的相同逻辑-如何抽离" class="headerlink" title="多个组件的相同逻辑, 如何抽离"></a>多个组件的相同逻辑, 如何抽离</h4><ul>
+<li>mixin</li>
+<li>mixin有缺点</li>
+</ul>
+<h4 id="何时使用异步组件"><a href="#何时使用异步组件" class="headerlink" title="何时使用异步组件"></a>何时使用异步组件</h4><ul>
+<li>加载大组件</li>
+<li>加载路由</li>
+</ul>
+<h4 id="何时使用keep-alive"><a href="#何时使用keep-alive" class="headerlink" title="何时使用keep-alive"></a>何时使用keep-alive</h4><ul>
+<li>缓存组件, 不需要重复渲染</li>
+<li>多个静态的tab页的切换</li>
+<li>优化性能</li>
+</ul>
+<h4 id="何时使用beforeDestroy"><a href="#何时使用beforeDestroy" class="headerlink" title="何时使用beforeDestroy"></a>何时使用beforeDestroy</h4><ul>
+<li>解除自定义事件</li>
+<li>清除定时器</li>
+<li>解绑自定义dom事件</li>
+</ul>
+<h4 id="什么是作用域插槽"><a href="#什么是作用域插槽" class="headerlink" title="什么是作用域插槽"></a>什么是作用域插槽</h4><h4 id="vuex中action和mutation有何区别"><a href="#vuex中action和mutation有何区别" class="headerlink" title="vuex中action和mutation有何区别"></a>vuex中action和mutation有何区别</h4><ul>
+<li>action中处理异步, mutation不可以</li>
+<li>mutation做原子操作</li>
+<li>action可以整合多个mutation</li>
+</ul>
+<h4 id="vue-router常用的路由模式"><a href="#vue-router常用的路由模式" class="headerlink" title="vue-router常用的路由模式"></a>vue-router常用的路由模式</h4><ul>
+<li>hash</li>
+<li>history</li>
+<li>两者比较</li>
+</ul>
+<h4 id="如何配置vue-router的异步加载"><a href="#如何配置vue-router的异步加载" class="headerlink" title="如何配置vue-router的异步加载"></a>如何配置vue-router的异步加载</h4><ul>
+<li>import方法</li>
+</ul>
+<h4 id="请用vnode描述一个dom结构"><a href="#请用vnode描述一个dom结构" class="headerlink" title="请用vnode描述一个dom结构"></a>请用vnode描述一个dom结构</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    tag: <span class="string">'div'</span>,</span><br><span class="line">        props: &#123;</span><br><span class="line">            className: <span class="string">'container'</span></span><br><span class="line">        &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                </span><br><span class="line">            ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="监听data变化的核心api是什么"><a href="#监听data变化的核心api是什么" class="headerlink" title="监听data变化的核心api是什么"></a>监听data变化的核心api是什么</h4><ul>
+<li>Object.defineProperty</li>
+<li>深度监听, 监听数组</li>
+<li>有缺点</li>
+</ul>
+<h4 id="vue如何监听数组变化"><a href="#vue如何监听数组变化" class="headerlink" title="vue如何监听数组变化"></a>vue如何监听数组变化</h4><ul>
+<li>Object.defineProperty不能监听数组变化</li>
+<li>重新定义原型, 重写push, pop等方法, 实现监听</li>
+<li>Proxy可以原生支持监听数组</li>
+</ul>
+<h4 id="描述响应式原理"><a href="#描述响应式原理" class="headerlink" title="描述响应式原理"></a>描述响应式原理</h4><ul>
+<li>监听data变化</li>
+<li>组件渲染和更新过程</li>
+</ul>
+<h4 id="diff算法的事件复杂度"><a href="#diff算法的事件复杂度" class="headerlink" title="diff算法的事件复杂度"></a>diff算法的事件复杂度</h4><ul>
+<li>O(n)</li>
+<li>在O(n^3)基础上做了一些调整</li>
+</ul>
+<h4 id="演示diff算法的过程"><a href="#演示diff算法的过程" class="headerlink" title="演示diff算法的过程"></a>演示diff算法的过程</h4><ul>
+<li>patch(elem, vnode)和patch(vnode, newVnode)</li>
+<li>patchVnode和addVnodes和removeVnodes</li>
+<li>updateChildren</li>
+</ul>
+<h4 id="vue为何是异步渲染-nextTick有什么用"><a href="#vue为何是异步渲染-nextTick有什么用" class="headerlink" title="vue为何是异步渲染, $nextTick有什么用"></a>vue为何是异步渲染, $nextTick有什么用</h4><ul>
+<li>异步渲染, 以及合并data修改, 以提高渲染性能</li>
+<li>$nextTick是在DOM更新完进行回调</li>
+</ul>
+<h4 id="vue常见性能优化方式"><a href="#vue常见性能优化方式" class="headerlink" title="vue常见性能优化方式"></a>vue常见性能优化方式</h4><ul>
+<li>合理使用v-show, v-if</li>
+<li>合理使用computed</li>
+<li>v-for使用key, 避免和v-if同时使用</li>
+<li>自定义事件, dom事件及时销毁</li>
+<li>合理使用异步组件</li>
+<li>合理使用keep-alive</li>
+<li>data层级不要太深</li>
+<li>使用vue-loader在开发环境下进行模板编译</li>
+<li>webpack层面的优化</li>
+<li>前端通用的性能优化</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/vue-yuanli/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1822,156 +2048,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/paint/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="meixiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="meixiang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/25/paint/" itemprop="url">js基础-渲染机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-25T20:33:12+08:00">
-                2020-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="从输入url到渲染出页面的整个过程"><a href="#从输入url到渲染出页面的整个过程" class="headerlink" title="从输入url到渲染出页面的整个过程"></a>从输入url到渲染出页面的整个过程</h4><ul>
-<li>加载资源</li>
-<li>渲染页面</li>
-</ul>
-<h4 id="window-onload和DOMContentLoaded的区别"><a href="#window-onload和DOMContentLoaded的区别" class="headerlink" title="window.onload和DOMContentLoaded的区别"></a>window.onload和DOMContentLoaded的区别</h4><ul>
-<li>前者资源全部加载完才执行, 包括图片</li>
-<li>后者是在dom渲染完成就执行, 图片可能尚未下载</li>
-</ul>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>加载资源的形式<ul>
-<li>html代码</li>
-<li>媒体文件</li>
-<li>js css</li>
-</ul>
-</li>
-<li>加载资源的过程<ul>
-<li>DNS解析: 域名 —&gt; IP地址</li>
-<li>浏览器根据IP地址向服务器发起http请求</li>
-<li>服务器处理请求, 并返回给浏览器</li>
-</ul>
-</li>
-<li>渲染页面的过程<ul>
-<li>根据HTML代码生成DOM树</li>
-<li>根据CSS代码生成CSSOM</li>
-<li>将DOM树和CSSOM整合成Render Tree</li>
-<li>根据Render Tree渲染页面</li>
-<li>遇到script则暂停渲染, 优先加载并执行JS代码, 完成再继续</li>
-<li>直至把Render Tree渲染完成</li>
-</ul>
-</li>
-</ul>
-<h4 id="为何把css放在head中"><a href="#为何把css放在head中" class="headerlink" title="为何把css放在head中"></a>为何把css放在head中</h4><h4 id><a href="#" class="headerlink" title></a></h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2022,7 +2098,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="js基础," />
+  <meta name="keywords" content="vue," />
 
 
 
@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="性能优化原则 多实用内存, 缓存或其他方法 减少CPU计算量, 减少网络加载耗时  优化方向 加载更快 减少资源体积: 压缩代码 减少访问次数, 合并代码, ssr, 缓存 静态资源加hash后缀, 根据文件内容计算hash 文件内容不变, 则hash不变, 则url不变 url和文件不变, 则会自动触发http缓存机制, 返回304   使用更快的网络, CDN   渲染更快 CSS放在head">
+<meta name="description" content="v-show和v-if的区别 v-show是通过CSS display控制显示和隐藏 v-if是组件真正的渲染和销毁, 而不是显示和隐藏 频繁切换显示状态用v-show, 否则用v-if  为何在v-for中使用key 必须使用key, 而且不能是index和random diff算法中通过tag和key来判断是否是sameNode 减少渲染次数, 提升渲染性能  描述Vue组件的声明周期(父子组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="性能优化">
-<meta property="og:url" content="http://yoursite.com/2020/02/25/xingneng/index.html">
+<meta property="og:title" content="vue-interview">
+<meta property="og:url" content="http://yoursite.com/2020/03/05/vue-interview/index.html">
 <meta property="og:site_name" content="meixiang">
-<meta property="og:description" content="性能优化原则 多实用内存, 缓存或其他方法 减少CPU计算量, 减少网络加载耗时  优化方向 加载更快 减少资源体积: 压缩代码 减少访问次数, 合并代码, ssr, 缓存 静态资源加hash后缀, 根据文件内容计算hash 文件内容不变, 则hash不变, 则url不变 url和文件不变, 则会自动触发http缓存机制, 返回304   使用更快的网络, CDN   渲染更快 CSS放在head">
+<meta property="og:description" content="v-show和v-if的区别 v-show是通过CSS display控制显示和隐藏 v-if是组件真正的渲染和销毁, 而不是显示和隐藏 频繁切换显示状态用v-show, 否则用v-if  为何在v-for中使用key 必须使用key, 而且不能是index和random diff算法中通过tag和key来判断是否是sameNode 减少渲染次数, 提升渲染性能  描述Vue组件的声明周期(父子组">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-25T13:09:18.000Z">
-<meta property="article:modified_time" content="2020-02-25T15:11:47.376Z">
+<meta property="article:published_time" content="2020-03-05T07:36:29.000Z">
+<meta property="article:modified_time" content="2020-03-05T08:11:06.844Z">
 <meta property="article:author" content="meixiang">
-<meta property="article:tag" content="js基础">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/25/xingneng/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/05/vue-interview/"/>
 
 
 
 
 
-  <title>性能优化 | meixiang</title>
+  <title>vue-interview | meixiang</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/xingneng/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/vue-interview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="meixiang">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">性能优化</h1>
+          <h1 class="post-title" itemprop="name headline">vue-interview</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-25T21:09:18+08:00">
-                2020-02-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-05T15:36:29+08:00">
+                2020-03-05
               </time>
             
 
@@ -374,38 +374,113 @@
       
 
       
-        <h4 id="性能优化原则"><a href="#性能优化原则" class="headerlink" title="性能优化原则"></a>性能优化原则</h4><ul>
-<li>多实用内存, 缓存或其他方法</li>
-<li>减少CPU计算量, 减少网络加载耗时</li>
+        <h4 id="v-show和v-if的区别"><a href="#v-show和v-if的区别" class="headerlink" title="v-show和v-if的区别"></a>v-show和v-if的区别</h4><ul>
+<li>v-show是通过CSS display控制显示和隐藏</li>
+<li>v-if是组件真正的渲染和销毁, 而不是显示和隐藏</li>
+<li>频繁切换显示状态用v-show, 否则用v-if</li>
 </ul>
-<h4 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h4><ul>
-<li>加载更快<ul>
-<li>减少资源体积: 压缩代码</li>
-<li>减少访问次数, 合并代码, ssr, 缓存<ul>
-<li>静态资源加hash后缀, 根据文件内容计算hash</li>
-<li>文件内容不变, 则hash不变, 则url不变</li>
-<li>url和文件不变, 则会自动触发http缓存机制, 返回304</li>
+<h4 id="为何在v-for中使用key"><a href="#为何在v-for中使用key" class="headerlink" title="为何在v-for中使用key"></a>为何在v-for中使用key</h4><ul>
+<li>必须使用key, 而且不能是index和random</li>
+<li>diff算法中通过tag和key来判断是否是sameNode</li>
+<li>减少渲染次数, 提升渲染性能</li>
 </ul>
-</li>
-<li>使用更快的网络, CDN</li>
+<h4 id="描述Vue组件的声明周期-父子组件"><a href="#描述Vue组件的声明周期-父子组件" class="headerlink" title="描述Vue组件的声明周期(父子组件)"></a>描述Vue组件的声明周期(父子组件)</h4><h4 id="vue组件如何通讯"><a href="#vue组件如何通讯" class="headerlink" title="vue组件如何通讯"></a>vue组件如何通讯</h4><ul>
+<li>props, $emit</li>
+<li>自定义事件</li>
+<li>vuex</li>
 </ul>
-</li>
-<li>渲染更快<ul>
-<li>CSS放在head, JS放在body最下面</li>
-<li>尽早开始执行JS, 用DOMContentLoaded触发</li>
-<li>懒加载</li>
-<li>对DOM查询进行缓存</li>
-<li>频繁操作DOM, 合并到一起插入DOM结构</li>
-<li>节流throttle, 防抖debounce</li>
+<h4 id="描述组件渲染和更新的过程"><a href="#描述组件渲染和更新的过程" class="headerlink" title="描述组件渲染和更新的过程"></a>描述组件渲染和更新的过程</h4><h4 id="双向数据绑定v-model的实现原理"><a href="#双向数据绑定v-model的实现原理" class="headerlink" title="双向数据绑定v-model的实现原理"></a>双向数据绑定v-model的实现原理</h4><ul>
+<li>input元素的value = this.name</li>
+<li>监听input事件this.name = $event.target.value</li>
+<li>data更新触发rerender</li>
 </ul>
-</li>
+<h4 id="对MVVM的理解"><a href="#对MVVM的理解" class="headerlink" title="对MVVM的理解"></a>对MVVM的理解</h4><h4 id="computed有何特点"><a href="#computed有何特点" class="headerlink" title="computed有何特点"></a>computed有何特点</h4><ul>
+<li>缓存</li>
+<li>提高性能</li>
 </ul>
-<h4 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay = <span class="number">100</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer)&#123;</span><br><span class="line">            clearTimeout(timer)</span><br><span class="line">        &#125;</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;,delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">input.addEventListener(<span class="string">'keyup'</span>, debounce(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(input.value)</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+<h4 id="为何组件data必须是一个函数"><a href="#为何组件data必须是一个函数" class="headerlink" title="为何组件data必须是一个函数"></a>为何组件data必须是一个函数</h4><ul>
+<li>防止数据互相污染</li>
+</ul>
+<h4 id="ajax请求应该放在哪个生命周期"><a href="#ajax请求应该放在哪个生命周期" class="headerlink" title="ajax请求应该放在哪个生命周期"></a>ajax请求应该放在哪个生命周期</h4><ul>
+<li>mounted</li>
+<li>js是单线程的, ajax异步获取数据</li>
+<li>放在前面没有用</li>
+</ul>
+<h4 id="如何将组件的所有props传给子组件"><a href="#如何将组件的所有props传给子组件" class="headerlink" title="如何将组件的所有props传给子组件"></a>如何将组件的所有props传给子组件</h4><ul>
+<li>v-bind=”$props”</li>
+</ul>
+<h4 id="如何自己实现v-model"><a href="#如何自己实现v-model" class="headerlink" title="如何自己实现v-model"></a>如何自己实现v-model</h4><h4 id="多个组件的相同逻辑-如何抽离"><a href="#多个组件的相同逻辑-如何抽离" class="headerlink" title="多个组件的相同逻辑, 如何抽离"></a>多个组件的相同逻辑, 如何抽离</h4><ul>
+<li>mixin</li>
+<li>mixin有缺点</li>
+</ul>
+<h4 id="何时使用异步组件"><a href="#何时使用异步组件" class="headerlink" title="何时使用异步组件"></a>何时使用异步组件</h4><ul>
+<li>加载大组件</li>
+<li>加载路由</li>
+</ul>
+<h4 id="何时使用keep-alive"><a href="#何时使用keep-alive" class="headerlink" title="何时使用keep-alive"></a>何时使用keep-alive</h4><ul>
+<li>缓存组件, 不需要重复渲染</li>
+<li>多个静态的tab页的切换</li>
+<li>优化性能</li>
+</ul>
+<h4 id="何时使用beforeDestroy"><a href="#何时使用beforeDestroy" class="headerlink" title="何时使用beforeDestroy"></a>何时使用beforeDestroy</h4><ul>
+<li>解除自定义事件</li>
+<li>清除定时器</li>
+<li>解绑自定义dom事件</li>
+</ul>
+<h4 id="什么是作用域插槽"><a href="#什么是作用域插槽" class="headerlink" title="什么是作用域插槽"></a>什么是作用域插槽</h4><h4 id="vuex中action和mutation有何区别"><a href="#vuex中action和mutation有何区别" class="headerlink" title="vuex中action和mutation有何区别"></a>vuex中action和mutation有何区别</h4><ul>
+<li>action中处理异步, mutation不可以</li>
+<li>mutation做原子操作</li>
+<li>action可以整合多个mutation</li>
+</ul>
+<h4 id="vue-router常用的路由模式"><a href="#vue-router常用的路由模式" class="headerlink" title="vue-router常用的路由模式"></a>vue-router常用的路由模式</h4><ul>
+<li>hash</li>
+<li>history</li>
+<li>两者比较</li>
+</ul>
+<h4 id="如何配置vue-router的异步加载"><a href="#如何配置vue-router的异步加载" class="headerlink" title="如何配置vue-router的异步加载"></a>如何配置vue-router的异步加载</h4><ul>
+<li>import方法</li>
+</ul>
+<h4 id="请用vnode描述一个dom结构"><a href="#请用vnode描述一个dom结构" class="headerlink" title="请用vnode描述一个dom结构"></a>请用vnode描述一个dom结构</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    tag: <span class="string">'div'</span>,</span><br><span class="line">        props: &#123;</span><br><span class="line">            className: <span class="string">'container'</span></span><br><span class="line">        &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                </span><br><span class="line">            ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay=<span class="number">100</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer) <span class="keyword">return</span> </span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<h4 id="监听data变化的核心api是什么"><a href="#监听data变化的核心api是什么" class="headerlink" title="监听data变化的核心api是什么"></a>监听data变化的核心api是什么</h4><ul>
+<li>Object.defineProperty</li>
+<li>深度监听, 监听数组</li>
+<li>有缺点</li>
+</ul>
+<h4 id="vue如何监听数组变化"><a href="#vue如何监听数组变化" class="headerlink" title="vue如何监听数组变化"></a>vue如何监听数组变化</h4><ul>
+<li>Object.defineProperty不能监听数组变化</li>
+<li>重新定义原型, 重写push, pop等方法, 实现监听</li>
+<li>Proxy可以原生支持监听数组</li>
+</ul>
+<h4 id="描述响应式原理"><a href="#描述响应式原理" class="headerlink" title="描述响应式原理"></a>描述响应式原理</h4><ul>
+<li>监听data变化</li>
+<li>组件渲染和更新过程</li>
+</ul>
+<h4 id="diff算法的事件复杂度"><a href="#diff算法的事件复杂度" class="headerlink" title="diff算法的事件复杂度"></a>diff算法的事件复杂度</h4><ul>
+<li>O(n)</li>
+<li>在O(n^3)基础上做了一些调整</li>
+</ul>
+<h4 id="演示diff算法的过程"><a href="#演示diff算法的过程" class="headerlink" title="演示diff算法的过程"></a>演示diff算法的过程</h4><ul>
+<li>patch(elem, vnode)和patch(vnode, newVnode)</li>
+<li>patchVnode和addVnodes和removeVnodes</li>
+<li>updateChildren</li>
+</ul>
+<h4 id="vue为何是异步渲染-nextTick有什么用"><a href="#vue为何是异步渲染-nextTick有什么用" class="headerlink" title="vue为何是异步渲染, $nextTick有什么用"></a>vue为何是异步渲染, $nextTick有什么用</h4><ul>
+<li>异步渲染, 以及合并data修改, 以提高渲染性能</li>
+<li>$nextTick是在DOM更新完进行回调</li>
+</ul>
+<h4 id="vue常见性能优化方式"><a href="#vue常见性能优化方式" class="headerlink" title="vue常见性能优化方式"></a>vue常见性能优化方式</h4><ul>
+<li>合理使用v-show, v-if</li>
+<li>合理使用computed</li>
+<li>v-for使用key, 避免和v-if同时使用</li>
+<li>自定义事件, dom事件及时销毁</li>
+<li>合理使用异步组件</li>
+<li>合理使用keep-alive</li>
+<li>data层级不要太深</li>
+<li>使用vue-loader在开发环境下进行模板编译</li>
+<li>webpack层面的优化</li>
+<li>前端通用的性能优化</li>
+</ul>
 
       
     </div>
@@ -423,7 +498,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js%E5%9F%BA%E7%A1%80/" rel="tag"># js基础</a>
+            <a href="/tags/vue/" rel="tag"># vue</a>
           
         </div>
       
@@ -436,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/25/paint/" rel="next" title="js基础-渲染机制">
-                <i class="fa fa-chevron-left"></i> js基础-渲染机制
+              <a href="/2020/03/03/vue-yuanli/" rel="next" title="vue原理">
+                <i class="fa fa-chevron-left"></i> vue原理
               </a>
             
           </div>
@@ -446,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/25/practice/" rel="prev" title="面试真题">
-                面试真题 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/12/25/epub/" rel="prev" title="epubjs相关api">
+                epubjs相关api <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#性能优化原则"><span class="nav-number">1.</span> <span class="nav-text">性能优化原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化方向"><span class="nav-number">2.</span> <span class="nav-text">优化方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防抖"><span class="nav-number">3.</span> <span class="nav-text">防抖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节流"><span class="nav-number">4.</span> <span class="nav-text">节流</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#v-show和v-if的区别"><span class="nav-number">1.</span> <span class="nav-text">v-show和v-if的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何在v-for中使用key"><span class="nav-number">2.</span> <span class="nav-text">为何在v-for中使用key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描述Vue组件的声明周期-父子组件"><span class="nav-number">3.</span> <span class="nav-text">描述Vue组件的声明周期(父子组件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue组件如何通讯"><span class="nav-number">4.</span> <span class="nav-text">vue组件如何通讯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描述组件渲染和更新的过程"><span class="nav-number">5.</span> <span class="nav-text">描述组件渲染和更新的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双向数据绑定v-model的实现原理"><span class="nav-number">6.</span> <span class="nav-text">双向数据绑定v-model的实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对MVVM的理解"><span class="nav-number">7.</span> <span class="nav-text">对MVVM的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#computed有何特点"><span class="nav-number">8.</span> <span class="nav-text">computed有何特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何组件data必须是一个函数"><span class="nav-number">9.</span> <span class="nav-text">为何组件data必须是一个函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ajax请求应该放在哪个生命周期"><span class="nav-number">10.</span> <span class="nav-text">ajax请求应该放在哪个生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何将组件的所有props传给子组件"><span class="nav-number">11.</span> <span class="nav-text">如何将组件的所有props传给子组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何自己实现v-model"><span class="nav-number">12.</span> <span class="nav-text">如何自己实现v-model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多个组件的相同逻辑-如何抽离"><span class="nav-number">13.</span> <span class="nav-text">多个组件的相同逻辑, 如何抽离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何时使用异步组件"><span class="nav-number">14.</span> <span class="nav-text">何时使用异步组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何时使用keep-alive"><span class="nav-number">15.</span> <span class="nav-text">何时使用keep-alive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何时使用beforeDestroy"><span class="nav-number">16.</span> <span class="nav-text">何时使用beforeDestroy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是作用域插槽"><span class="nav-number">17.</span> <span class="nav-text">什么是作用域插槽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuex中action和mutation有何区别"><span class="nav-number">18.</span> <span class="nav-text">vuex中action和mutation有何区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue-router常用的路由模式"><span class="nav-number">19.</span> <span class="nav-text">vue-router常用的路由模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何配置vue-router的异步加载"><span class="nav-number">20.</span> <span class="nav-text">如何配置vue-router的异步加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请用vnode描述一个dom结构"><span class="nav-number">21.</span> <span class="nav-text">请用vnode描述一个dom结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监听data变化的核心api是什么"><span class="nav-number">22.</span> <span class="nav-text">监听data变化的核心api是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue如何监听数组变化"><span class="nav-number">23.</span> <span class="nav-text">vue如何监听数组变化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描述响应式原理"><span class="nav-number">24.</span> <span class="nav-text">描述响应式原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#diff算法的事件复杂度"><span class="nav-number">25.</span> <span class="nav-text">diff算法的事件复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#演示diff算法的过程"><span class="nav-number">26.</span> <span class="nav-text">演示diff算法的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue为何是异步渲染-nextTick有什么用"><span class="nav-number">27.</span> <span class="nav-text">vue为何是异步渲染, $nextTick有什么用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue常见性能优化方式"><span class="nav-number">28.</span> <span class="nav-text">vue常见性能优化方式</span></a></li></ol></div>
             
 
           </div>

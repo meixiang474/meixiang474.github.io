@@ -304,6 +304,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/20/ajax/" itemprop="url">ajax</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-20T01:56:51+08:00">
+                2019-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="手写一个简易的ajax"><a href="#手写一个简易的ajax" class="headerlink" title="手写一个简易的ajax"></a>手写一个简易的ajax</h4><ul>
+<li><p>XMLHttpRequest</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'/api'</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            alert(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'其他情况'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send(<span class="literal">null</span>)</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'/api'</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            alert(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send(<span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">   username: <span class="string">'zs'</span>     </span><br><span class="line">&#125;))</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttprequest()</span><br><span class="line">            xhr.open(<span class="string">'GET'</span>, <span class="string">'/api'</span>, <span class="literal">true</span>)</span><br><span class="line">            xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">                        resolve(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.status === <span class="number">404</span>)&#123;</span><br><span class="line">                        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'404 not found'</span>))</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xhr.send(<span class="literal">null</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>readyState<ul>
+<li>0: 还没有调用send()方法</li>
+<li>1:  载入, 以调用send方法,正在发送请求</li>
+<li>2: send()方法执行完成, 已经接受到全部响应内容</li>
+<li>3: 正在解析响应内容</li>
+<li>4: 响应内容解析完成, 可以在客户端调用</li>
+</ul>
+</li>
+<li>status<ul>
+<li>2xx- 表示成功处理请求</li>
+<li>3xx- 需要重定向, 浏览器直接跳转, 如: 301永远重定向, 302临时重定向 ,304资源为改变, 调用缓存</li>
+<li>4xx- 客户端请求错误, 404地址输入错误, 403没有权限</li>
+<li>5xx - 服务端错误</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="跨域的常用解决方案"><a href="#跨域的常用解决方案" class="headerlink" title="跨域的常用解决方案"></a>跨域的常用解决方案</h4><ul>
+<li><p>同源策略-跨域解决方案</p>
+<ul>
+<li>ajax请求时, 浏览器要求当前网页和server必须同源(安全)</li>
+<li>同源: 协议, 域名, 端口, 三者必须一致</li>
+<li>加载图片, css, js可无视同源策略</li>
+</ul>
+</li>
+<li><p>JSONP</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.callback = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">           <span class="built_in">console</span>.log(data)</span></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://localhost:8002/jsonp.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cors跨域</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/04/js-event/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1299,7 +1455,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1321,7 +1477,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

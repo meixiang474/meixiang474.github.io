@@ -447,6 +447,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/react-use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/05/react-use/" itemprop="url">react使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-05T19:39:05+08:00">
+                2020-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="事件基本使用"><a href="#事件基本使用" class="headerlink" title="事件基本使用"></a>事件基本使用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">base</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; </span><br><span class="line">      list: [</span><br><span class="line">        &#123;</span><br><span class="line">          name: <span class="string">'zs'</span>,</span><br><span class="line">          id: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name: <span class="string">'ls'</span>,</span><br><span class="line">          id: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">this</span>.clickHandle = <span class="keyword">this</span>.clickHandle.bind(<span class="keyword">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123; </span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">this</span>.state.list.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> (</span><br><span class="line">            &lt;div key=&#123;index&#125;&gt;</span><br><span class="line">              &#123;item.name&#125;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">          )</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;this.clickHandle&#125;&gt;点击增加&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/&gt;</span></span><br><span class="line"><span class="regexp">     );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  clickHandle()&#123;</span></span><br><span class="line"><span class="regexp">    const list = this.state.list.slice()</span></span><br><span class="line"><span class="regexp">    list.push(&#123;name: 'ww', id: 2&#125;)</span></span><br><span class="line"><span class="regexp">    this.setState(&#123;</span></span><br><span class="line"><span class="regexp">      list</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"> </span></span><br><span class="line"><span class="regexp">export default base;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>event是合成事件</li>
+<li>event.nativeEvent是原生事件</li>
+<li>所有事件都被挂载在dcument上</li>
+</ul>
+<h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><ul>
+<li>不可变值</li>
+<li>可能是异步更新<ul>
+<li>普通用法是异步的</li>
+<li>setTimeout中是同步的</li>
+<li>自定义事件中使用时同步的</li>
+</ul>
+</li>
+<li>可能会被合并<ul>
+<li>传对象会合并</li>
+<li>传函数不会被合并</li>
+</ul>
+</li>
+</ul>
+<h4 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h4><ul>
+<li><p>挂载时</p>
+<ul>
+<li>constructor</li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+</li>
+<li><p>更新时</p>
+<ul>
+<li>shouldComponentUpdate</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ul>
+<ul>
+<li><p>销毁时</p>
+<ul>
+<li>componentWillUnmount</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/vue3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1832,205 +1997,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/practice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="meixiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="meixiang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/25/practice/" itemprop="url">面试真题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-25T23:27:45+08:00">
-                2020-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="var-和-let-const的区别"><a href="#var-和-let-const的区别" class="headerlink" title="var 和 let const的区别"></a>var 和 let const的区别</h4><ul>
-<li>var 存在变量提升</li>
-<li>let const存在块级作用域</li>
-</ul>
-<h4 id="typeof返回哪些类型"><a href="#typeof返回哪些类型" class="headerlink" title="typeof返回哪些类型"></a>typeof返回哪些类型</h4><ul>
-<li>undefined string number symbol boolean</li>
-<li>object</li>
-<li>function</li>
-</ul>
-<h4 id="列举强制类型转换和隐式类型转换"><a href="#列举强制类型转换和隐式类型转换" class="headerlink" title="列举强制类型转换和隐式类型转换"></a>列举强制类型转换和隐式类型转换</h4><ul>
-<li>强制: parseInt parseFloat toString</li>
-<li>隐式: if 逻辑运算, ==, +拼接字符串</li>
-</ul>
-<h4 id="手写深度比较"><a href="#手写深度比较" class="headerlink" title="手写深度比较"></a>手写深度比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断是否是对象或数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> obj === <span class="string">'object'</span> &amp;&amp; obj !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 全相等</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEqual</span>(<span class="params">obj1, obj2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isObject(obj1) || !isObject(obj2)) <span class="keyword">return</span> obj1 === obj2</span><br><span class="line">    <span class="keyword">if</span>(obj1 === obj2) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment">// 1 先取出obj1和obj2的keys比较个数</span></span><br><span class="line">    <span class="keyword">const</span> obj1Keys = <span class="built_in">Object</span>.keys(obj1)</span><br><span class="line">    <span class="keyword">const</span> obj2Keys = <span class="built_in">Object</span>.keys(obj2)</span><br><span class="line">    <span class="keyword">if</span>(obj1Keys !== obj2Keys) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> obj1)&#123;</span><br><span class="line">        <span class="keyword">const</span> res = isEqual(obj1[key], obj2[key])</span><br><span class="line">        <span class="keyword">if</span>(!res) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="split和join的区别"><a href="#split和join的区别" class="headerlink" title="split和join的区别"></a>split和join的区别</h4><ul>
-<li>互为逆运算</li>
-</ul>
-<h4 id="数组的pop-push-unshift-shift分别做什么"><a href="#数组的pop-push-unshift-shift分别做什么" class="headerlink" title="数组的pop push unshift shift分别做什么"></a>数组的pop push unshift shift分别做什么</h4><ul>
-<li>纯函数: 1. 不改变原数组, 2. 返回一个数组</li>
-<li>纯函数: slice, concat, map, filter</li>
-<li>非纯函数: pop, push, shift, unshift, forEach, some, every, reduce</li>
-</ul>
-<h4 id="数组slice和splice的区别"><a href="#数组slice和splice的区别" class="headerlink" title="数组slice和splice的区别"></a>数组slice和splice的区别</h4><h4 id="10-20-30-map-parseInt-的返回结果"><a href="#10-20-30-map-parseInt-的返回结果" class="headerlink" title="[10,20,30].map(parseInt)的返回结果"></a>[10,20,30].map(parseInt)的返回结果</h4><ul>
-<li>[10,NaN, NaN]</li>
-</ul>
-<h4 id="ajax-gethe-post请求的区别"><a href="#ajax-gethe-post请求的区别" class="headerlink" title="ajax, gethe post请求的区别"></a>ajax, gethe post请求的区别</h4><ul>
-<li>get一般用于查询, post一般用于提交</li>
-<li>get参数拼接在url上, post放在请求体内(数据体积可以更大)</li>
-<li>安全性, post易于防止xsrf</li>
-</ul>
-<h4 id="call和apply的区别"><a href="#call和apply的区别" class="headerlink" title="call和apply的区别"></a>call和apply的区别</h4><ul>
-<li>参数</li>
-</ul>
-<h4 id="事件代理委托是什么"><a href="#事件代理委托是什么" class="headerlink" title="事件代理委托是什么"></a>事件代理委托是什么</h4><h4 id="闭包是什么-有什么特性-有何影响"><a href="#闭包是什么-有什么特性-有何影响" class="headerlink" title="闭包是什么 有什么特性 有何影响"></a>闭包是什么 有什么特性 有何影响</h4><ul>
-<li>变量会常驻内存, 得不到释放</li>
-</ul>
-<h4 id="如何阻止事件冒泡和默认行为"><a href="#如何阻止事件冒泡和默认行为" class="headerlink" title="如何阻止事件冒泡和默认行为"></a>如何阻止事件冒泡和默认行为</h4><ul>
-<li>event.stopPropagation()</li>
-<li>event.preventDefault()</li>
-</ul>
-<h4 id="查找-添加-删除-移动DOM节点的方法"><a href="#查找-添加-删除-移动DOM节点的方法" class="headerlink" title="查找, 添加, 删除, 移动DOM节点的方法"></a>查找, 添加, 删除, 移动DOM节点的方法</h4><h4 id="如何减少DOM操作"><a href="#如何减少DOM操作" class="headerlink" title="如何减少DOM操作"></a>如何减少DOM操作</h4><ul>
-<li>缓存DOM查询结果</li>
-<li>多次DOM操作一次插入</li>
-</ul>
-<h4 id="jsonp的原理-为什么他不是真正的ajax"><a href="#jsonp的原理-为什么他不是真正的ajax" class="headerlink" title="jsonp的原理, 为什么他不是真正的ajax"></a>jsonp的原理, 为什么他不是真正的ajax</h4><h4 id="函数声明和函数表达式的区别"><a href="#函数声明和函数表达式的区别" class="headerlink" title="函数声明和函数表达式的区别"></a>函数声明和函数表达式的区别</h4><ul>
-<li>函数声明会在代码执行前进行预加载, 而函数表达式则不会</li>
-</ul>
-<h4 id="new-Object-和-Object-create-的区别"><a href="#new-Object-和-Object-create-的区别" class="headerlink" title="new Object() 和 Object.create()的区别"></a>new Object() 和 Object.create()的区别</h4><ul>
-<li>字面量等同于new Object() 原型是Object.prototype</li>
-<li>Object.create(null) 没有原型</li>
-</ul>
-<h4 id="字符串-字母开头-后面字母数字下划线-长度6-30"><a href="#字符串-字母开头-后面字母数字下划线-长度6-30" class="headerlink" title="字符串, 字母开头, 后面字母数字下划线, 长度6-30"></a>字符串, 字母开头, 后面字母数字下划线, 长度6-30</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reg = <span class="regexp">/^[a-zA-Z]\w&#123;5,29&#125;$/</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="手写字符串trim方法-保证浏览器兼容性"><a href="#手写字符串trim方法-保证浏览器兼容性" class="headerlink" title="手写字符串trim方法, 保证浏览器兼容性"></a>手写字符串trim方法, 保证浏览器兼容性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.trim = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/^\s+/</span>, <span class="string">''</span>).replace(<span class="regexp">/\s+$/</span>, <span class="string">''</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="如何获取最大值"><a href="#如何获取最大值" class="headerlink" title="如何获取最大值"></a>如何获取最大值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMax</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> nums = [...arguments]</span><br><span class="line">    <span class="keyword">let</span> max = nums[<span class="number">0</span>]</span><br><span class="line">    nums.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(item &gt;max)&#123;</span><br><span class="line">            max = item</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> max</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="什么是json"><a href="#什么是json" class="headerlink" title="什么是json"></a>什么是json</h4><ul>
-<li>json是一种数据格式, 本质是一段字符串</li>
-<li>json格式和js对象结构一致, 对js语言更友好</li>
-<li>window.JSON是一个全局对象: JSON.stringify, JSON.parse</li>
-</ul>
-<h4 id="获取当前页面url参数"><a href="#获取当前页面url参数" class="headerlink" title="获取当前页面url参数"></a>获取当前页面url参数</h4><ul>
-<li><p>传统方式: location.search</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">query</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> search = location.search.substr(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">`(^|&amp;)<span class="subst">$&#123;name&#125;</span>=([^&amp;]*)(&amp;|$)`</span>, <span class="string">'i'</span>)</span><br><span class="line">    <span class="keyword">const</span> res = search.match(reg)</span><br><span class="line">    <span class="keyword">if</span>(res === <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res[<span class="number">2</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>URLSearchParams</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">query</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> search = location.search</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> URLSearchParams(search)</span><br><span class="line">    <span class="keyword">return</span> p.get(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="将url参数解析为js对象"><a href="#将url参数解析为js对象" class="headerlink" title="将url参数解析为js对象"></a>将url参数解析为js对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queryToObj</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> search = location.search.substr(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">const</span> res= &#123;&#125;</span><br><span class="line">    search.split(<span class="string">'&amp;'</span>).forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> arr = item.split(<span class="string">'='</span>)</span><br><span class="line">        res[arr[<span class="number">0</span>]] =  arr[<span class="number">1</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="拍平数组"><a href="#拍平数组" class="headerlink" title="拍平数组"></a>拍平数组</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flatten</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">     arr.forEach(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(item))&#123;</span><br><span class="line">         arr.splice(index, <span class="number">1</span>, ...flatten(item))   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">set</span> = new Set(arr)</span><br><span class="line">    return [...<span class="keyword">set</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function fn1(arr)&#123;</span><br><span class="line">    <span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">    arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(obj[item])&#123;</span><br><span class="line">            obj[item]++</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            obj[item] = <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(obj)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2081,7 +2047,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2103,7 +2069,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

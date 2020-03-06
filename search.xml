@@ -33,6 +33,88 @@
       </tags>
   </entry>
   <entry>
+    <title>react面试题</title>
+    <url>/2020/03/06/react-interview/</url>
+    <content><![CDATA[<h4 id="组件之间如何通讯"><a href="#组件之间如何通讯" class="headerlink" title="组件之间如何通讯"></a>组件之间如何通讯</h4><ul>
+<li>父子组件使用props</li>
+<li>redux, context</li>
+</ul>
+<h4 id="jsx本质是什么"><a href="#jsx本质是什么" class="headerlink" title="jsx本质是什么"></a>jsx本质是什么</h4><ul>
+<li>createElement</li>
+<li>返回vnode</li>
+</ul>
+<h4 id="context是什么-如何应用"><a href="#context是什么-如何应用" class="headerlink" title="context是什么, 如何应用"></a>context是什么, 如何应用</h4><ul>
+<li>顶层组件向下所有的子孙传递信息</li>
+<li>复杂的使用redux</li>
+</ul>
+<h4 id="scu的用途"><a href="#scu的用途" class="headerlink" title="scu的用途"></a>scu的用途</h4><ul>
+<li>性能优化</li>
+<li>配合不可变值</li>
+</ul>
+<h4 id="redux单向数据流"><a href="#redux单向数据流" class="headerlink" title="redux单向数据流"></a>redux单向数据流</h4><h4 id="什么是纯函数"><a href="#什么是纯函数" class="headerlink" title="什么是纯函数"></a>什么是纯函数</h4><ul>
+<li>返回一个新值, 没有副作用</li>
+<li>重点: 不可变值</li>
+<li>输入数组, 返回数组, 输入对象, 返回对象</li>
+</ul>
+<h4 id="react组件生命周期"><a href="#react组件生命周期" class="headerlink" title="react组件生命周期"></a>react组件生命周期</h4><h4 id="ajax放在哪"><a href="#ajax放在哪" class="headerlink" title="ajax放在哪"></a>ajax放在哪</h4><ul>
+<li>componentDidMount</li>
+</ul>
+<h4 id="函数组件和class组件的区别"><a href="#函数组件和class组件的区别" class="headerlink" title="函数组件和class组件的区别"></a>函数组件和class组件的区别</h4><ul>
+<li>纯函数, 输入props, 输出jsx</li>
+<li>没有实例, 没有生命周期, 没有state</li>
+<li>不能扩展其他方法</li>
+</ul>
+<h4 id="什么是受控组件"><a href="#什么是受控组件" class="headerlink" title="什么是受控组件"></a>什么是受控组件</h4><ul>
+<li>表单的值受state的控制</li>
+<li>需要自行监听onChange, 更新state</li>
+</ul>
+<h4 id="何时使用异步组件"><a href="#何时使用异步组件" class="headerlink" title="何时使用异步组件"></a>何时使用异步组件</h4><ul>
+<li>加载大组件</li>
+<li>路由懒加载</li>
+</ul>
+<h4 id="多个组件抽离公共逻辑"><a href="#多个组件抽离公共逻辑" class="headerlink" title="多个组件抽离公共逻辑"></a>多个组件抽离公共逻辑</h4><ul>
+<li>高阶组件</li>
+<li>render props</li>
+</ul>
+<h4 id="redux如何进行异步请求"><a href="#redux如何进行异步请求" class="headerlink" title="redux如何进行异步请求"></a>redux如何进行异步请求</h4><ul>
+<li>redux-thunk</li>
+</ul>
+<h4 id="react-router如何配置懒加载"><a href="#react-router如何配置懒加载" class="headerlink" title="react-router如何配置懒加载"></a>react-router如何配置懒加载</h4><h4 id="PureComponent"><a href="#PureComponent" class="headerlink" title="PureComponent"></a>PureComponent</h4><ul>
+<li>实现了浅比较scu</li>
+<li>优化性能</li>
+<li>结合不可变值</li>
+</ul>
+<h4 id="react事件和dom事件的区别"><a href="#react事件和dom事件的区别" class="headerlink" title="react事件和dom事件的区别"></a>react事件和dom事件的区别</h4><ul>
+<li>所有事件挂载到document上</li>
+<li>event不是原生的, 是合成事件对象</li>
+<li>dispatchEvent</li>
+</ul>
+<h4 id="react性能优化"><a href="#react性能优化" class="headerlink" title="react性能优化"></a>react性能优化</h4><ul>
+<li>渲染列表时使用Key</li>
+<li>自定义事件, dom事件及时销毁</li>
+<li>合理使用异步组件</li>
+<li>减少函数bind this的次数</li>
+<li>合理使用scu, PureComponent, memo</li>
+<li>合理使用immutable.js</li>
+<li>webpack层面的优化</li>
+<li>前端通用的性能优化</li>
+</ul>
+<h4 id="react和vue的区别"><a href="#react和vue的区别" class="headerlink" title="react和vue的区别"></a>react和vue的区别</h4><ul>
+<li>都支持组件化</li>
+<li>都支持数据驱动视图</li>
+<li>都是用vnode操作dom</li>
+<li>react使用jsx拥抱js</li>
+<li>vue使用模板拥抱html</li>
+<li>react函数式编程</li>
+<li>vue声明式编程</li>
+<li>react更纯粹, vue是全家桶</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>react原理</title>
     <url>/2020/03/06/react-yuanli/</url>
     <content><![CDATA[<h4 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h4><h4 id="JSX本质"><a href="#JSX本质" class="headerlink" title="JSX本质"></a>JSX本质</h4><ul>

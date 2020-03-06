@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="js基础," />
+  <meta name="keywords" content="react," />
 
 
 
@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="性能优化原则 多实用内存, 缓存或其他方法 减少CPU计算量, 减少网络加载耗时  优化方向 加载更快 减少资源体积: 压缩代码 减少访问次数, 合并代码, ssr, 缓存 静态资源加hash后缀, 根据文件内容计算hash 文件内容不变, 则hash不变, 则url不变 url和文件不变, 则会自动触发http缓存机制, 返回304   使用更快的网络, CDN   渲染更快 CSS放在head">
+<meta name="description" content="组件之间如何通讯 父子组件使用props redux, context  jsx本质是什么 createElement 返回vnode  context是什么, 如何应用 顶层组件向下所有的子孙传递信息 复杂的使用redux  scu的用途 性能优化 配合不可变值  redux单向数据流什么是纯函数 返回一个新值, 没有副作用 重点: 不可变值 输入数组, 返回数组, 输入对象, 返回对象  re">
 <meta property="og:type" content="article">
-<meta property="og:title" content="性能优化">
-<meta property="og:url" content="http://yoursite.com/2020/02/25/xingneng/index.html">
+<meta property="og:title" content="react面试题">
+<meta property="og:url" content="http://yoursite.com/2020/03/06/react-interview/index.html">
 <meta property="og:site_name" content="meixiang">
-<meta property="og:description" content="性能优化原则 多实用内存, 缓存或其他方法 减少CPU计算量, 减少网络加载耗时  优化方向 加载更快 减少资源体积: 压缩代码 减少访问次数, 合并代码, ssr, 缓存 静态资源加hash后缀, 根据文件内容计算hash 文件内容不变, 则hash不变, 则url不变 url和文件不变, 则会自动触发http缓存机制, 返回304   使用更快的网络, CDN   渲染更快 CSS放在head">
+<meta property="og:description" content="组件之间如何通讯 父子组件使用props redux, context  jsx本质是什么 createElement 返回vnode  context是什么, 如何应用 顶层组件向下所有的子孙传递信息 复杂的使用redux  scu的用途 性能优化 配合不可变值  redux单向数据流什么是纯函数 返回一个新值, 没有副作用 重点: 不可变值 输入数组, 返回数组, 输入对象, 返回对象  re">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-25T13:09:18.000Z">
-<meta property="article:modified_time" content="2020-02-25T15:11:47.376Z">
+<meta property="article:published_time" content="2020-03-06T12:36:40.000Z">
+<meta property="article:modified_time" content="2020-03-06T13:08:09.041Z">
 <meta property="article:author" content="meixiang">
-<meta property="article:tag" content="js基础">
+<meta property="article:tag" content="react">
 <meta name="twitter:card" content="summary">
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/25/xingneng/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/06/react-interview/"/>
 
 
 
 
 
-  <title>性能优化 | meixiang</title>
+  <title>react面试题 | meixiang</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/xingneng/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/react-interview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="meixiang">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">性能优化</h1>
+          <h1 class="post-title" itemprop="name headline">react面试题</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-25T21:09:18+08:00">
-                2020-02-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-06T20:36:40+08:00">
+                2020-03-06
               </time>
             
 
@@ -374,38 +374,80 @@
       
 
       
-        <h4 id="性能优化原则"><a href="#性能优化原则" class="headerlink" title="性能优化原则"></a>性能优化原则</h4><ul>
-<li>多实用内存, 缓存或其他方法</li>
-<li>减少CPU计算量, 减少网络加载耗时</li>
+        <h4 id="组件之间如何通讯"><a href="#组件之间如何通讯" class="headerlink" title="组件之间如何通讯"></a>组件之间如何通讯</h4><ul>
+<li>父子组件使用props</li>
+<li>redux, context</li>
 </ul>
-<h4 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h4><ul>
-<li>加载更快<ul>
-<li>减少资源体积: 压缩代码</li>
-<li>减少访问次数, 合并代码, ssr, 缓存<ul>
-<li>静态资源加hash后缀, 根据文件内容计算hash</li>
-<li>文件内容不变, 则hash不变, 则url不变</li>
-<li>url和文件不变, 则会自动触发http缓存机制, 返回304</li>
+<h4 id="jsx本质是什么"><a href="#jsx本质是什么" class="headerlink" title="jsx本质是什么"></a>jsx本质是什么</h4><ul>
+<li>createElement</li>
+<li>返回vnode</li>
 </ul>
-</li>
-<li>使用更快的网络, CDN</li>
+<h4 id="context是什么-如何应用"><a href="#context是什么-如何应用" class="headerlink" title="context是什么, 如何应用"></a>context是什么, 如何应用</h4><ul>
+<li>顶层组件向下所有的子孙传递信息</li>
+<li>复杂的使用redux</li>
 </ul>
-</li>
-<li>渲染更快<ul>
-<li>CSS放在head, JS放在body最下面</li>
-<li>尽早开始执行JS, 用DOMContentLoaded触发</li>
-<li>懒加载</li>
-<li>对DOM查询进行缓存</li>
-<li>频繁操作DOM, 合并到一起插入DOM结构</li>
-<li>节流throttle, 防抖debounce</li>
+<h4 id="scu的用途"><a href="#scu的用途" class="headerlink" title="scu的用途"></a>scu的用途</h4><ul>
+<li>性能优化</li>
+<li>配合不可变值</li>
 </ul>
-</li>
+<h4 id="redux单向数据流"><a href="#redux单向数据流" class="headerlink" title="redux单向数据流"></a>redux单向数据流</h4><h4 id="什么是纯函数"><a href="#什么是纯函数" class="headerlink" title="什么是纯函数"></a>什么是纯函数</h4><ul>
+<li>返回一个新值, 没有副作用</li>
+<li>重点: 不可变值</li>
+<li>输入数组, 返回数组, 输入对象, 返回对象</li>
 </ul>
-<h4 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay = <span class="number">100</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer)&#123;</span><br><span class="line">            clearTimeout(timer)</span><br><span class="line">        &#125;</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;,delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">input.addEventListener(<span class="string">'keyup'</span>, debounce(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(input.value)</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
-
-<h4 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay=<span class="number">100</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer) <span class="keyword">return</span> </span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<h4 id="react组件生命周期"><a href="#react组件生命周期" class="headerlink" title="react组件生命周期"></a>react组件生命周期</h4><h4 id="ajax放在哪"><a href="#ajax放在哪" class="headerlink" title="ajax放在哪"></a>ajax放在哪</h4><ul>
+<li>componentDidMount</li>
+</ul>
+<h4 id="函数组件和class组件的区别"><a href="#函数组件和class组件的区别" class="headerlink" title="函数组件和class组件的区别"></a>函数组件和class组件的区别</h4><ul>
+<li>纯函数, 输入props, 输出jsx</li>
+<li>没有实例, 没有生命周期, 没有state</li>
+<li>不能扩展其他方法</li>
+</ul>
+<h4 id="什么是受控组件"><a href="#什么是受控组件" class="headerlink" title="什么是受控组件"></a>什么是受控组件</h4><ul>
+<li>表单的值受state的控制</li>
+<li>需要自行监听onChange, 更新state</li>
+</ul>
+<h4 id="何时使用异步组件"><a href="#何时使用异步组件" class="headerlink" title="何时使用异步组件"></a>何时使用异步组件</h4><ul>
+<li>加载大组件</li>
+<li>路由懒加载</li>
+</ul>
+<h4 id="多个组件抽离公共逻辑"><a href="#多个组件抽离公共逻辑" class="headerlink" title="多个组件抽离公共逻辑"></a>多个组件抽离公共逻辑</h4><ul>
+<li>高阶组件</li>
+<li>render props</li>
+</ul>
+<h4 id="redux如何进行异步请求"><a href="#redux如何进行异步请求" class="headerlink" title="redux如何进行异步请求"></a>redux如何进行异步请求</h4><ul>
+<li>redux-thunk</li>
+</ul>
+<h4 id="react-router如何配置懒加载"><a href="#react-router如何配置懒加载" class="headerlink" title="react-router如何配置懒加载"></a>react-router如何配置懒加载</h4><h4 id="PureComponent"><a href="#PureComponent" class="headerlink" title="PureComponent"></a>PureComponent</h4><ul>
+<li>实现了浅比较scu</li>
+<li>优化性能</li>
+<li>结合不可变值</li>
+</ul>
+<h4 id="react事件和dom事件的区别"><a href="#react事件和dom事件的区别" class="headerlink" title="react事件和dom事件的区别"></a>react事件和dom事件的区别</h4><ul>
+<li>所有事件挂载到document上</li>
+<li>event不是原生的, 是合成事件对象</li>
+<li>dispatchEvent</li>
+</ul>
+<h4 id="react性能优化"><a href="#react性能优化" class="headerlink" title="react性能优化"></a>react性能优化</h4><ul>
+<li>渲染列表时使用Key</li>
+<li>自定义事件, dom事件及时销毁</li>
+<li>合理使用异步组件</li>
+<li>减少函数bind this的次数</li>
+<li>合理使用scu, PureComponent, memo</li>
+<li>合理使用immutable.js</li>
+<li>webpack层面的优化</li>
+<li>前端通用的性能优化</li>
+</ul>
+<h4 id="react和vue的区别"><a href="#react和vue的区别" class="headerlink" title="react和vue的区别"></a>react和vue的区别</h4><ul>
+<li>都支持组件化</li>
+<li>都支持数据驱动视图</li>
+<li>都是用vnode操作dom</li>
+<li>react使用jsx拥抱js</li>
+<li>vue使用模板拥抱html</li>
+<li>react函数式编程</li>
+<li>vue声明式编程</li>
+<li>react更纯粹, vue是全家桶</li>
+</ul>
 
       
     </div>
@@ -423,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js%E5%9F%BA%E7%A1%80/" rel="tag"># js基础</a>
+            <a href="/tags/react/" rel="tag"># react</a>
           
         </div>
       
@@ -436,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/25/paint/" rel="next" title="js基础-渲染机制">
-                <i class="fa fa-chevron-left"></i> js基础-渲染机制
+              <a href="/2020/03/06/react-yuanli/" rel="next" title="react原理">
+                <i class="fa fa-chevron-left"></i> react原理
               </a>
             
           </div>
@@ -446,8 +488,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/25/practice/" rel="prev" title="面试真题">
-                面试真题 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/12/25/epub/" rel="prev" title="epubjs相关api">
+                epubjs相关api <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#性能优化原则"><span class="nav-number">1.</span> <span class="nav-text">性能优化原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化方向"><span class="nav-number">2.</span> <span class="nav-text">优化方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防抖"><span class="nav-number">3.</span> <span class="nav-text">防抖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节流"><span class="nav-number">4.</span> <span class="nav-text">节流</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#组件之间如何通讯"><span class="nav-number">1.</span> <span class="nav-text">组件之间如何通讯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jsx本质是什么"><span class="nav-number">2.</span> <span class="nav-text">jsx本质是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#context是什么-如何应用"><span class="nav-number">3.</span> <span class="nav-text">context是什么, 如何应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scu的用途"><span class="nav-number">4.</span> <span class="nav-text">scu的用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redux单向数据流"><span class="nav-number">5.</span> <span class="nav-text">redux单向数据流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是纯函数"><span class="nav-number">6.</span> <span class="nav-text">什么是纯函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react组件生命周期"><span class="nav-number">7.</span> <span class="nav-text">react组件生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ajax放在哪"><span class="nav-number">8.</span> <span class="nav-text">ajax放在哪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数组件和class组件的区别"><span class="nav-number">9.</span> <span class="nav-text">函数组件和class组件的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是受控组件"><span class="nav-number">10.</span> <span class="nav-text">什么是受控组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何时使用异步组件"><span class="nav-number">11.</span> <span class="nav-text">何时使用异步组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多个组件抽离公共逻辑"><span class="nav-number">12.</span> <span class="nav-text">多个组件抽离公共逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redux如何进行异步请求"><span class="nav-number">13.</span> <span class="nav-text">redux如何进行异步请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react-router如何配置懒加载"><span class="nav-number">14.</span> <span class="nav-text">react-router如何配置懒加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PureComponent"><span class="nav-number">15.</span> <span class="nav-text">PureComponent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react事件和dom事件的区别"><span class="nav-number">16.</span> <span class="nav-text">react事件和dom事件的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react性能优化"><span class="nav-number">17.</span> <span class="nav-text">react性能优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react和vue的区别"><span class="nav-number">18.</span> <span class="nav-text">react和vue的区别</span></a></li></ol></div>
             
 
           </div>

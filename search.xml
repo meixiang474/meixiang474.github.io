@@ -33,6 +33,72 @@
       </tags>
   </entry>
   <entry>
+    <title>react原理</title>
+    <url>/2020/03/06/react-yuanli/</url>
+    <content><![CDATA[<h4 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h4><h4 id="JSX本质"><a href="#JSX本质" class="headerlink" title="JSX本质"></a>JSX本质</h4><ul>
+<li>JSX等同于vue模板</li>
+<li>vue模板不是html</li>
+<li>JSX不是JS</li>
+<li>React.createElement即h函数, 返回vnode</li>
+<li>第一个参数, 可能是组件, 也可能是html tag</li>
+<li>组件名, 首字母不许大写(规定)</li>
+</ul>
+<h4 id="react合成事件机制"><a href="#react合成事件机制" class="headerlink" title="react合成事件机制"></a>react合成事件机制</h4><ul>
+<li>所有事件挂载在document上</li>
+<li>event不是原生的</li>
+<li>事件冒泡到document, 实例化统一的react event, 派发到相应的事件处理函数</li>
+<li>更好的兼容性和跨平台</li>
+<li>挂载到document, 减少内存消耗, 避免频繁解绑</li>
+</ul>
+<h4 id="setState和batchUpdate"><a href="#setState和batchUpdate" class="headerlink" title="setState和batchUpdate"></a>setState和batchUpdate</h4><ul>
+<li>函数开始batchUpdate是true, 结束时设为false</li>
+<li>batchUpdate为true时是异步</li>
+<li>什么能命中batchUpdate机制<ul>
+<li>生命周期</li>
+<li>注册的事件</li>
+<li>React管理的入口</li>
+</ul>
+</li>
+<li>不能命中的函数<ul>
+<li>setTimeout, setInterval</li>
+<li>自定义事件</li>
+<li>React管不到的入口</li>
+</ul>
+</li>
+<li>transaction事务机制<ul>
+<li>initialize</li>
+<li>函数体</li>
+<li>close</li>
+</ul>
+</li>
+</ul>
+<h4 id="组件渲染和更新过程"><a href="#组件渲染和更新过程" class="headerlink" title="组件渲染和更新过程"></a>组件渲染和更新过程</h4><ul>
+<li>渲染<ul>
+<li>props state</li>
+<li>render()生成vnode</li>
+<li>patch(elem, vnode)</li>
+</ul>
+</li>
+<li>更新<ul>
+<li>setState —-&gt; dirtyComponents</li>
+<li>render生成newVnode</li>
+<li>patch(vnode, newVnode)<ul>
+<li>reconciliation阶段—-执行diff算法, 纯js计算(将这个阶段进行拆分)<ul>
+<li>window.requestIdleCallback时计算暂停, 进行渲染(fiber)</li>
+</ul>
+</li>
+<li>commit阶段——–将diff结果渲染到dom中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>react高级</title>
     <url>/2020/03/06/react-pro/</url>
     <content><![CDATA[<h4 id="函数组件和class组件有何区别"><a href="#函数组件和class组件有何区别" class="headerlink" title="函数组件和class组件有何区别"></a>函数组件和class组件有何区别</h4><ul>

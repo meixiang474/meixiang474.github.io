@@ -447,6 +447,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/suanfa1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/08/suanfa1/" itemprop="url">算法-双指针</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-08T14:57:17+08:00">
+                2020-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="leetcode167-两数之和"><a href="#leetcode167-两数之和" class="headerlink" title="leetcode167-两数之和"></a>leetcode167-两数之和</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">numbers, target</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> left = <span class="number">0</span></span><br><span class="line">      <span class="keyword">let</span> right = numbers.length<span class="number">-1</span></span><br><span class="line">      <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">let</span> sum = numbers[left] + numbers[right]</span><br><span class="line">        <span class="keyword">if</span>(sum&gt;target)&#123;</span><br><span class="line">          right--</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum&lt;target)&#123;</span><br><span class="line">          left++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum === target) <span class="keyword">return</span> [left, right]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode345-反转字符串中的元音字母"><a href="#leetcode345-反转字符串中的元音字母" class="headerlink" title="leetcode345-反转字符串中的元音字母"></a>leetcode345-反转字符串中的元音字母</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">s</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">const</span> arr = [<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>, <span class="string">'A'</span>, <span class="string">'E'</span>, <span class="string">'I'</span>, <span class="string">'O'</span>, <span class="string">'U'</span>]</span><br><span class="line">     <span class="keyword">const</span> str = s.split(<span class="string">''</span>)</span><br><span class="line">     <span class="keyword">let</span> left = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">let</span> right = s.length <span class="number">-1</span> </span><br><span class="line">     <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">       <span class="keyword">if</span>(arr.includes(str[left]))&#123;</span><br><span class="line">         <span class="keyword">if</span>(!arr.includes(str[right]))&#123;</span><br><span class="line">           right--</span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str[left] === str[right])&#123;</span><br><span class="line">            right--</span><br><span class="line">            left++</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> temp = str[right]</span><br><span class="line">            str[right] = str[left]</span><br><span class="line">            str[left] = temp</span><br><span class="line">            left++</span><br><span class="line">            right--</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">         left++</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> str.join(<span class="string">''</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode633-平方数之和"><a href="#leetcode633-平方数之和" class="headerlink" title="leetcode633-平方数之和"></a>leetcode633-平方数之和</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">c</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> right = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.pow(c, <span class="number">0.5</span>))</span><br><span class="line">  <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="built_in">Math</span>.pow(left, <span class="number">2</span>) + <span class="built_in">Math</span>.pow(right, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span>(res &lt; c)&#123;</span><br><span class="line">      left++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(res &gt; c)&#123;</span><br><span class="line">      right--</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(res === c) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/webpack-pro-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2047,133 +2172,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/vuex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="meixiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="meixiang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/03/vuex/" itemprop="url">vuex和vue-router</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-03T14:05:44+08:00">
-                2020-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="路由模式"><a href="#路由模式" class="headerlink" title="路由模式"></a>路由模式</h4><ul>
-<li>hash模式</li>
-<li>H5 history模式(需要server端支持)</li>
-</ul>
-<h4 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h4><ul>
-<li>动态路由</li>
-<li>懒加载</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2224,7 +2222,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2246,7 +2244,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="项目," />
 
 
 
@@ -94,12 +94,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="meixiang">
-<meta property="og:url" content="http://yoursite.com/tags/epubjs/index.html">
+<meta name="description" content="支付宝支付 支付宝支付后端会返回给前端一个form标签的字符串 需要一个中转的新窗口用来执行该字符串中的脚本  12345678910111213141516171819202122232425262728293031323334353637383940&lt;template&gt;  &lt;div class&#x3D;&quot;ali-pay&quot;&gt;    &lt;div c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pc支付解决方案">
+<meta property="og:url" content="http://yoursite.com/2020/03/08/pc-pay/index.html">
 <meta property="og:site_name" content="meixiang">
+<meta property="og:description" content="支付宝支付 支付宝支付后端会返回给前端一个form标签的字符串 需要一个中转的新窗口用来执行该字符串中的脚本  12345678910111213141516171819202122232425262728293031323334353637383940&lt;template&gt;  &lt;div class&#x3D;&quot;ali-pay&quot;&gt;    &lt;div c">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-08T07:40:04.000Z">
+<meta property="article:modified_time" content="2020-03-08T07:56:01.495Z">
 <meta property="article:author" content="meixiang">
+<meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
 
 
@@ -129,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/epubjs/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/08/pc-pay/"/>
 
 
 
 
 
-  <title>Tag: epubjs | meixiang</title>
+  <title>pc支付解决方案 | meixiang</title>
   
 
 
@@ -160,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,54 +293,164 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>epubjs<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/pc-pay/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="meixiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="meixiang">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/12/25/epub/" itemprop="url">
-              
-                <span itemprop="name">epubjs相关api</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">pc支付解决方案</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-12-25T10:59:51+08:00"
-              content="2020-12-25" >
-          12-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-08T15:40:04+08:00">
+                2020-03-08
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="支付宝支付"><a href="#支付宝支付" class="headerlink" title="支付宝支付"></a>支付宝支付</h3><ul>
+<li>支付宝支付后端会返回给前端一个form标签的字符串</li>
+<li>需要一个中转的新窗口用来执行该字符串中的脚本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;ali-pay&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;form&quot; v-html&#x3D;&quot;content&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;loading v-if&#x3D;&quot;loading&quot;&gt;&lt;&#x2F;loading&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import Loading from &#39;..&#x2F;..&#x2F;components&#x2F;common&#x2F;Loading&#39;</span><br><span class="line">export default &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    Loading</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      orderId: this.$route.query.orderId,</span><br><span class="line">      content: &#39;&#39;,</span><br><span class="line">      loading: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    this.paySubmit()</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    paySubmit () &#123;</span><br><span class="line">      this.axios.post(&#39;&#x2F;pay&#39;, &#123;</span><br><span class="line">        orderId: this.orderId,</span><br><span class="line">        orderName: &#39;vue小米商城&#39;,</span><br><span class="line">        amount: 0.01,</span><br><span class="line">        payType: 1</span><br><span class="line">      &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">        this.content &#x3D; res.content</span><br><span class="line">        setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">          document.forms[0].submit()</span><br><span class="line">        &#125;, 100)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="微信支付"><a href="#微信支付" class="headerlink" title="微信支付"></a>微信支付</h3><ul>
+<li>微信支付需要前端解析后端返回的二维码, 需要安装qrcode这个运行依赖</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">this.axios.post(&#39;&#x2F;pay&#39;, &#123;</span><br><span class="line">          orderId: this.orderNo,</span><br><span class="line">          orderName: &#39;Vue高仿小米商城&#39;,</span><br><span class="line">          amount: 0.01,</span><br><span class="line">          payType: 2</span><br><span class="line">        &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">          QRCode.toDataURL(res.content).then(url &#x3D;&gt; &#123;</span><br><span class="line">            this.showPay &#x3D; true</span><br><span class="line">            this.payImg &#x3D; url</span><br><span class="line">          &#125;).catch(() &#x3D;&gt; &#123;</span><br><span class="line">            this.$message.error(&#39;二维码生成失败, 请稍后提示&#39;)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将获取到的payImg这个url渲染出来即可</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag"># 项目</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/08/vue-packagejson-vueconfigjs/" rel="next" title="vue配置">
+                <i class="fa fa-chevron-left"></i> vue配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/25/epub/" rel="prev" title="epubjs相关api">
+                epubjs相关api <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -343,6 +458,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -363,8 +482,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -426,6 +554,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#支付宝支付"><span class="nav-number">1.</span> <span class="nav-text">支付宝支付</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微信支付"><span class="nav-number">2.</span> <span class="nav-text">微信支付</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -551,10 +695,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

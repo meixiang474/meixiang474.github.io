@@ -33,6 +33,28 @@
       </tags>
   </entry>
   <entry>
+    <title>pc支付解决方案</title>
+    <url>/2020/03/08/pc-pay/</url>
+    <content><![CDATA[<h3 id="支付宝支付"><a href="#支付宝支付" class="headerlink" title="支付宝支付"></a>支付宝支付</h3><ul>
+<li>支付宝支付后端会返回给前端一个form标签的字符串</li>
+<li>需要一个中转的新窗口用来执行该字符串中的脚本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;ali-pay&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;form&quot; v-html&#x3D;&quot;content&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;loading v-if&#x3D;&quot;loading&quot;&gt;&lt;&#x2F;loading&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import Loading from &#39;..&#x2F;..&#x2F;components&#x2F;common&#x2F;Loading&#39;</span><br><span class="line">export default &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    Loading</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      orderId: this.$route.query.orderId,</span><br><span class="line">      content: &#39;&#39;,</span><br><span class="line">      loading: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    this.paySubmit()</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    paySubmit () &#123;</span><br><span class="line">      this.axios.post(&#39;&#x2F;pay&#39;, &#123;</span><br><span class="line">        orderId: this.orderId,</span><br><span class="line">        orderName: &#39;vue小米商城&#39;,</span><br><span class="line">        amount: 0.01,</span><br><span class="line">        payType: 1</span><br><span class="line">      &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">        this.content &#x3D; res.content</span><br><span class="line">        setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">          document.forms[0].submit()</span><br><span class="line">        &#125;, 100)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="微信支付"><a href="#微信支付" class="headerlink" title="微信支付"></a>微信支付</h3><ul>
+<li>微信支付需要前端解析后端返回的二维码, 需要安装qrcode这个运行依赖</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">this.axios.post(&#39;&#x2F;pay&#39;, &#123;</span><br><span class="line">          orderId: this.orderNo,</span><br><span class="line">          orderName: &#39;Vue高仿小米商城&#39;,</span><br><span class="line">          amount: 0.01,</span><br><span class="line">          payType: 2</span><br><span class="line">        &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">          QRCode.toDataURL(res.content).then(url &#x3D;&gt; &#123;</span><br><span class="line">            this.showPay &#x3D; true</span><br><span class="line">            this.payImg &#x3D; url</span><br><span class="line">          &#125;).catch(() &#x3D;&gt; &#123;</span><br><span class="line">            this.$message.error(&#39;二维码生成失败, 请稍后提示&#39;)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将获取到的payImg这个url渲染出来即可</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>项目</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue配置</title>
     <url>/2020/03/08/vue-packagejson-vueconfigjs/</url>
     <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    host: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="number">8080</span>,</span><br><span class="line">    proxy: &#123;</span><br><span class="line">      <span class="string">'/api'</span>: &#123;</span><br><span class="line">        target: <span class="string">'http://mall-pre.springboot.cn'</span>,</span><br><span class="line">        changeOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          <span class="string">'/api'</span>: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// publicPath: '/app',</span></span><br><span class="line">  <span class="comment">// outputDir: 'dist',</span></span><br><span class="line">  <span class="comment">// indexPath: 'index2.html',</span></span><br><span class="line">  productionSourceMap: <span class="literal">false</span>,</span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config.plugins.delete(<span class="string">'prefetch'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

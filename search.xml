@@ -33,6 +33,16 @@
       </tags>
   </entry>
   <entry>
+    <title>react配置代理</title>
+    <url>/2020/03/08/react-proxy/</url>
+    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="built_in">require</span>(<span class="string">'http-proxy-middleware'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">app</span>)</span>&#123;</span><br><span class="line">  app.use(</span><br><span class="line">    <span class="string">'/api'</span>,</span><br><span class="line">    proxy.createProxyMiddleware(&#123;</span><br><span class="line">      target: <span class="string">'http://mall-pre.springboot.cn'</span>,</span><br><span class="line">      changeOrigin: <span class="literal">true</span>,</span><br><span class="line">      pathRewrite: &#123;</span><br><span class="line">        <span class="string">'^/api'</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>react项目</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>算法-双指针</title>
     <url>/2020/03/08/suanfa1/</url>
     <content><![CDATA[<h4 id="leetcode167-两数之和"><a href="#leetcode167-两数之和" class="headerlink" title="leetcode167-两数之和"></a>leetcode167-两数之和</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">numbers, target</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> left = <span class="number">0</span></span><br><span class="line">      <span class="keyword">let</span> right = numbers.length<span class="number">-1</span></span><br><span class="line">      <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">let</span> sum = numbers[left] + numbers[right]</span><br><span class="line">        <span class="keyword">if</span>(sum&gt;target)&#123;</span><br><span class="line">          right--</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum&lt;target)&#123;</span><br><span class="line">          left++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum === target) <span class="keyword">return</span> [left, right]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
